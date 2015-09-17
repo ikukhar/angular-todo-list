@@ -3,4 +3,11 @@
   $http.get('./projects.json').success((data) ->
     $scope.projects = data
   )
+
+  $scope.sortableOptions = {
+    axis: 'y',
+    update: (e, ui) ->
+      console.log e
+      console.log ui
+  }
 ]

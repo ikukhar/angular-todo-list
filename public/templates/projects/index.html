@@ -1,4 +1,4 @@
 <a href="/#">index</a>
-<ul ng-repeat="project in projects">
-  <li><a ng-click="viewProject(project.id)">{{ project.name }}</a></li>
+<ul ui-sortable='sortableOptions'>
+  <li ng-repeat="project in projects"><h1>{{ project.name }} ({{project.id}})</h1></li>
 </ul>

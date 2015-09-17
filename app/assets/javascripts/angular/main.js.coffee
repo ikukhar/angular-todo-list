@@ -1,4 +1,5 @@
-@todo_list = angular.module('TodoList', ['ngRoute'])
+
+@todo_list = angular.module('TodoList', ['ngRoute', 'ui.sortable'])
 
 @todo_list.config(['$routeProvider', ($routeProvider) ->
 

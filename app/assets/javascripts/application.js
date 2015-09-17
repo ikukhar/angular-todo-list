@@ -12,8 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require bootstrap-sprockets
 //= require angular/angular
 //= require angular/angular-route
+//= require angular/sortable
 //= require angular/main
 //= require_tree .
