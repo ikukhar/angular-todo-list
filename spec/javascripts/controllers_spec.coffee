@@ -1,11 +1,14 @@
-describe "Todo-list controllers", ->
-  beforeEach module("todo-list")
+describe 'Todo List controllers', ->
+  describe 'ProjectsController', ->
+    $scope = null
+    $controller = null
 
-  describe "ProjectsCtrl", -&gt;
-    it "should set projects to an empty array", inject(($controller) ->
-      scope = {}
-      ctrl = $controller("ProjectsCtrl",
-        $scope: scope
-      )
-      expect(scope.projects.length).toBe 0
-    )
+    beforeEach module('TodoList')
+
+    beforeEach inject ($injector) ->
+      $scope = $injector.get('$rootScope').$new()
+      $controller = $injector.get('$controller')
+
+    it 'create controller', ->
+      $controller('ProjectsController', { $scope: $scope })
+      expect($scope.projects.length).toBe(0)

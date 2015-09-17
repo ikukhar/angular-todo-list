@@ -18,6 +18,7 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 
 gem 'haml-rails'
+gem 'bootstrap-sass', '~> 3.3.5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -25,6 +26,8 @@ group :development, :test do
   gem "rspec-rails", "~> 3.0"
   gem 'spork', github: 'sporkrb/spork'
   gem 'spork-rails'
+  gem 'teaspoon-jasmine'
+  gem 'phantomjs'
 end
 
 group :development do
