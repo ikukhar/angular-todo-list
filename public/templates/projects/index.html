@@ -1,4 +1,55 @@
 <a href="/#">index</a>
-<ul ui-sortable='sortableOptions'>
-  <li ng-repeat="project in projects"><h1>{{ project.name }} ({{project.id}})</h1></li>
-</ul>
+
+<div class = "container">
+  <div class="col-sm-6.col-sm-offset-3">
+    <div class="input-group">
+      <input type="search" class="form-control" placeholder="Search project" ng-model="search">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span> Search</button>
+      </span>
+    </div>
+
+    <form ng-submit="addProject()">
+    <div class="input-group">
+      <input type="text" class="form-control" ng-model="newProject">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-plus"></span> Add</button>
+      </span>
+    </div>
+    </form>
+
+    <ul ui-sortable='projectSortableOptions' class="list-unstyled">
+      <li class="animate-enter" ng-repeat="project in projects | filter :search">
+
+        <div class="panel panel-info">
+          <div class="panel-heading">{{ project.name }}</div>
+          <div class="panel-body">
+            <!-- <ul class="nav nav-pills task-filter">
+              <li ng-class="{'active' : show == 'All' }" ng-click="show='All'"><a href="">All</a></li>
+              <li ng-class="{'active' : show == 'Incomplete' }" ng-click="show='Incomplete'"><a href="">Incomplete</a></li>
+              <li ng-class="{'active' : show == 'Complete' }" ng-click="show='Complete'"><a href="">Complete</a></li>
+            </ul> -->
+
+            <ul class="list-unstyled" ui-sortable='projectSortableOptions'>
+              <li class="animate-enter" ng-repeat="task in project.tasks | filter :showTasks">
+                {{ task.name }}
+              </li>
+            </ul>
+
+          </div>
+        </div>
+
+      </li>
+
+      <li class="animate-enter" ng-if="results.length == 0">
+        <strong>No results found...</strong>
+      </li>
+
+    </ul>
+
+    <div class="debug">
+      <p class="text-info">{{ projects | json}}</p>
+    </div>
+  </div>
+
+</div>
