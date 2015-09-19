@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
+
   root 'static_pages#index'
 
-  resources :projects
+  scope '/api' do
+    mount_devise_token_auth_for 'User', at: '/auth'
+    resources :projects
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

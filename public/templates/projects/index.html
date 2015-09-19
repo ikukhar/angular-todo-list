@@ -1,4 +1,9 @@
-<a href="/#">index</a>
+
+<li ng-show="!user.id"><a ng-href="/sign_in">Sign in</a></li>
+<li ng-show="user.id"><a ng-click='signOut()'>Sign out</a></li>
+<div class="alert alert-danger" role="alert" ng-show="error">
+  {{error}}
+</div>
 
 <div class = "container">
   <div class="col-sm-6.col-sm-offset-3">
