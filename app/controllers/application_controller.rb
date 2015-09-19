@@ -1,4 +1,8 @@
 class ApplicationController < ActionController::Base
   include DeviseTokenAuth::Concerns::SetUserByToken
-  # include ActionController::MimeResponds
+
+  # Prevent CSRF attacks by using :null_session
+  protect_from_forgery with: :null_session
+
+  respond_to :json
 end

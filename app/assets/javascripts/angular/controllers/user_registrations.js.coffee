@@ -6,11 +6,10 @@
 
   $scope.handleRegBtnClick = ->
     $auth.submitRegistration($scope.registrationForm)
-    .then( ->
+    .then ->
       $auth.submitLogin({
         email: $scope.registrationForm.email,
         password: $scope.registrationForm.password
       })
-    )
 
 ]

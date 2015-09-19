@@ -1,3 +1,12 @@
+
+<div class="alert alert-danger" role="alert" ng-show="error">
+  {{error}}
+</div>
+
+<div class="input-group">
+  <button ng-click="authenticate('github')" class="btn btn-primary btn-lg">Sign in with github</button>
+</div>
+
 <form ng-submit="submitLogin(loginForm)" role="form" ng-init="loginForm = {}">
   <div class="form-group">
     <label for="email">Email</label>

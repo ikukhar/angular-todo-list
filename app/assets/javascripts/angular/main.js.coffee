@@ -8,8 +8,8 @@
 @todo_list.config(['$routeProvider', '$locationProvider', ($routeProvider, $locationProvider) ->
 
   $routeProvider
-    .when('/projects', {
-      templateUrl: '../templates/projects/index.html',
+    .when('/', {
+      templateUrl: '../templates/index.html',
       controller: 'ProjectsController',
       resolve: {
         auth: ['$auth', ($auth) ->
@@ -21,17 +21,32 @@
       templateUrl: 'templates/user_sessions/new.html',
       controller: 'UserSessionsController'
     })
+    .when('/sign_up', {
+      templateUrl: 'templates/user_registrations/new.html',
+      controller: 'UserRegistrationsController'
+    })
     .otherwise({
-      templateUrl: '../templates/home.html',
-      controller: 'HomeController'
+       redirectTo: '/'
     })
 
   $locationProvider.html5Mode(true)
 
 ])
 
-@todo_list.run (['$rootScope', '$location', ($rootScope, $location) ->
+@todo_list.run (['$rootScope', '$location', '$auth', ($rootScope, $location, $auth) ->
+
+  $rootScope.$on( "$routeUpdate", (e, next, current) ->
+    # TODO
+    unless $rootScope.user.signedIn
+      unless $location.path().match(/\/sign_\w+/)
+        $location.path('/sign_in')
+  )
+
   $rootScope.$on('auth:login-success', ->
-    $location.path('/projects')
+    $location.path('/')
+  )
+
+  $rootScope.$on('auth:logout-success', ->
+    $location.path('/sign_in')
   )
 ])
