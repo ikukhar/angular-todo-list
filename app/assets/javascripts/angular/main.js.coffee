@@ -43,8 +43,7 @@
 
 @todo_list.run (['$rootScope', '$location', '$auth', ($rootScope, $location, $auth) ->
 
-  $rootScope.$on( "$routeUpdate", (e, next, current) ->
-    # TODO
+  $rootScope.$on( "$locationChangeSuccess", (e, next, current) ->
     unless $rootScope.user.signedIn
       unless $location.path().match(/\/sign_\w+/)
         $location.path('/sign_in')
