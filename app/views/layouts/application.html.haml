@@ -1,5 +1,5 @@
 !!!
-%html{ "ng-app": "TodoList" }
+%html{ :"ng-app" => "TodoList" }
   %head
     %title Angular Todo List
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
@@ -12,27 +12,27 @@
       .container
         .col-sm-8.col-sm-offset-2
           .navbar-header
-            %a{ "ng-href": '\\', class: 'navbar-brand' }
+            %a{ :"ng-href" => "/", class: 'navbar-brand' }
               Angular Todo List
           #navbar
-            %ul.nav.navbar-nav.pull-right{ "ng-controller": "UserSessionsController" }
-              %li.dropdown{ "ng-show": "user.signedIn" }
-                %a.dropdown-toggle{ "data-toggle": "dropdown", "ng-href": "#" }
+            %ul.nav.navbar-nav.pull-right{ :"ng-controller" => "UserSessionsController" }
+              %li.dropdown{ :"ng-show" => "user.signedIn" }
+                %a.dropdown-toggle{ :"data-toggle" => "dropdown", :"ng-href" => "#" }
                   {{user.email}}
                   %span.caret
                 %ul.dropdown-menu{ role: "menu" }
                   %li
-                    %a{ "ng-href": "#" }
+                    %a{ :"ng-href" => "#" }
                       Profile
                   %li
-                    %a{ "ng-href": "#", "ng-click": 'signOut()' }
+                    %a{ :"ng-href" => "#", :"ng-click" => 'signOut()' }
                       Sign out
 
-              %li{ "ng-show": "!user.signedIn" }
-                %a{ "ng-href": "/sign_in" }
+              %li{ :"ng-show" => "!user.signedIn" }
+                %a{ :"ng-href" => "/sign_in" }
                   Log In
-              %li{ "ng-show": "!user.signedIn" }
-                %a{ "ng-href": "/sign_up" }
+              %li{ :"ng-show" => "!user.signedIn" }
+                %a{ :"ng-href" => "/sign_up" }
                   Sign Up
     .container
       .col-sm-8.col-sm-offset-2

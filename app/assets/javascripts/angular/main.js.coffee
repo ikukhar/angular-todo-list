@@ -5,7 +5,8 @@
   'ng-token-auth'
 ])
 
-@todo_list.config(['$routeProvider', '$locationProvider', ($routeProvider, $locationProvider) ->
+@todo_list.config(['$routeProvider', '$locationProvider', '$authProvider', (
+                    $routeProvider, $locationProvider, $authProvider) ->
 
   $routeProvider
     .when('/', {
@@ -30,6 +31,13 @@
     })
 
   $locationProvider.html5Mode(true)
+
+  $authProvider.configure({
+    apiUrl: 'http://34758f04.ngrok.com',
+    authProviderPaths: {
+      github: '/auth/github'
+    }
+  })
 
 ])
 
