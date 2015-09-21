@@ -24,8 +24,14 @@
   <li class="animate-enter" ng-repeat="project in projects | filter :search">
 
     <div class="panel panel-info">
-      <div class="panel-heading">{{ project.name }}</div>
+      <div class="panel-heading" ng-click="project.editEnabled = true" ng-hide="project.editEnabled">{{ project.name }}</div>
       <div class="panel-body">
+        <div ng-show="project.editEnabled">
+          <input ng-model="project.name" ng-show="project.editEnabled">
+          <a href="#" ng-click="saveProject(project)">Save</a>
+          or
+          <a href="#" ng-click="project.editEnabled = false">cancel</a>.
+        </div>
         <!-- <ul class="nav nav-pills task-filter">
           <li ng-class="{'active' : show == 'All' }" ng-click="show='All'"><a href="">All</a></li>
           <li ng-class="{'active' : show == 'Incomplete' }" ng-click="show='Incomplete'"><a href="">Incomplete</a></li>

@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
-  # Include default devise modules.
+
+  has_many :projects, dependent: :destroy
+
   devise :database_authenticatable,
          :registerable,
          :rememberable,

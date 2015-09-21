@@ -33,7 +33,7 @@
   $locationProvider.html5Mode(true)
 
   $authProvider.configure({
-    apiUrl: 'http://34758f04.ngrok.com',
+    # apiUrl: 'http://34758f04.ngrok.com',
     authProviderPaths: {
       github: '/auth/github'
     }
