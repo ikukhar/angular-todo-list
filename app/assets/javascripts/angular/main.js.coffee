@@ -9,7 +9,7 @@
 
   $routeProvider
     .when('/', {
-      templateUrl: '../templates/index.html',
+      templateUrl: '/assets/main.html',
       controller: 'ProjectsController',
       resolve: {
         auth: ['$auth', ($auth) ->
@@ -18,11 +18,11 @@
       }
     })
     .when('/sign_in', {
-      templateUrl: 'templates/user_sessions/new.html',
+      templateUrl: '/assets/user_sessions/new.html',
       controller: 'UserSessionsController'
     })
     .when('/sign_up', {
-      templateUrl: 'templates/user_registrations/new.html',
+      templateUrl: '/assets/user_registrations/new.html',
       controller: 'UserRegistrationsController'
     })
     .otherwise({

@@ -23,6 +23,7 @@ gem 'devise_token_auth'
 gem 'omniauth',  '>= 1.0.0'
 gem 'rails-api'
 gem 'responders', '~> 2.0'
+gem 'angular-rails-templates'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
