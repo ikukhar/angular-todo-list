@@ -11,12 +11,13 @@
   $routeProvider
     .when('/', {
       templateUrl: '../templates/index.html',
-      controller: 'ProjectsController',
-      resolve: {
-        auth: ['$auth', ($auth) ->
-          return $auth.validateUser();
-        ]
-      }
+      controller: 'ProjectsController'
+      # ,
+      # resolve: {
+      #   auth: ['$auth', ($auth) ->
+      #     return $auth.validateUser
+      #   ]
+      # }
     })
     .when('/sign_in', {
       templateUrl: 'templates/user_sessions/new.html',
@@ -25,6 +26,12 @@
     .when('/sign_up', {
       templateUrl: 'templates/user_registrations/new.html',
       controller: 'UserRegistrationsController'
+      # ,
+      # resolve: {
+      #   auth: ['$auth', ($auth) ->
+      #     return !$auth.validateUser
+      #   ]
+      # }
     })
     .otherwise({
        redirectTo: '/'

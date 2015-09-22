@@ -33,9 +33,9 @@ module AngularTodoList
     config.active_record.raise_in_transactional_callbacks = true
 
     #omniauth neaded session
-    config.middleware.use Rack::MethodOverride
-    config.middleware.use ActionDispatch::Cookies
-    config.middleware.use ActionDispatch::Session::CookieStore
-    config.middleware.use ActionDispatch::Flash
+    # config.middleware.use Rack::MethodOverride
+    # config.middleware.use ActionDispatch::Cookies
+    # config.middleware.use ActionDispatch::Session::CookieStore
+    # config.middleware.use ActionDispatch::Flash
   end
 end

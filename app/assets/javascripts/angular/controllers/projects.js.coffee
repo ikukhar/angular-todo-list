@@ -1,7 +1,10 @@
 @todo_list.controller 'ProjectsController', ['$scope', '$location', '$http', ($scope, $location, $http) ->
+
   $scope.projects = []
-  $http.get('./projects.json').success((data) ->
+  $http.get('/api/projects').success((data) ->
     $scope.projects = data
+  ).error( ->
+    $scope.error = data
   )
 
   # $scope.projects = [
@@ -41,25 +44,41 @@
       project:
         name: $scope.newProject
 
-    $http.post('./projects.json', data).success((data) ->
+    $http.post('/api/projects.json', data).success((data) ->
 
       $scope.projects.unshift(data)
       $scope.newProject = ""
       console.log('Successfully created post.')
 
     ).error( ->
-      console.error('Failed to create new post.')
+      $scope.error = data
     )
 
-    return true
-
   $scope.saveProject = (project) =>
-    project.editEnabled = false
+    # if $scope.newProject == ''
+    #   alert('Name is blank.')
+    #   return false
+    #
+    # data =
+    #   project:
+    #     name: $scope.name
+    #
+    # $http.post("/api/projects/#{project.id}", data).success((data) ->
+    #
+    #   $scope.projects.unshift(data)
+    #   $scope.newProject = ""
+    #   console.log('Successfully created post.')
+    #
+    # ).error( ->
+    #   $scope.error = data
+    # )
 
   $scope.filtersTasks = { };
   $scope.show = 'Complete'
 
   $scope.showTasks = (task) ->
+    return true
+    # TODO
     console.log 'showTask'
     console.log task
     console.log $scope.show
