@@ -56,6 +56,7 @@ GEM
     bootstrap-sass (3.3.5.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.3.0)
+    bower-rails (0.10.0)
     builder (3.2.2)
     byebug (6.0.2)
     coffee-rails (4.1.0)
@@ -216,6 +217,7 @@ PLATFORMS
 DEPENDENCIES
   angular-rails-templates
   bootstrap-sass (~> 3.3.5)
+  bower-rails
   byebug
   coffee-rails (~> 4.1.0)
   devise_token_auth

@@ -17,7 +17,6 @@
 
   $scope.projectSortableOptions = {
     cursor : "move",
-    tolerance : "pointer",
     update: (e, ui) ->
       console.log e
       console.log ui
@@ -25,7 +24,6 @@
 
   $scope.taskSortableOptions = {
     cursor : "move",
-    tolerance : "pointer",
     update: (e, ui) ->
       console.log e
       console.log ui
