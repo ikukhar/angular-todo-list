@@ -1,0 +1,35 @@
+.alert.alert-danger{"ng-show" => "error", :role => "alert"}
+  {{error}}
+.input-group
+  %input.form-control{"ng-model" => "search", :placeholder => "Search project", :type => "search"}/
+  %span.input-group-btn
+    %button.btn.btn-default{:type => "button"}
+      %span.glyphicon.glyphicon-search
+      Search
+%p
+%form{"ng-submit" => "addProject()"}
+  .input-group
+    %input.form-control{"ng-model" => "newProject", :type => "text"}/
+    %span.input-group-btn
+      %button.btn.btn-default{:type => "submit"}
+        %span.glyphicon.glyphicon-plus
+        Add
+%ul.list-unstyled{"ui-sortable" => "projectSortableOptions"}
+  %li.animate-enter{"ng-repeat" => "project in projects | filter :search"}
+    .panel.panel-info
+      .panel-heading {{ project.name }}
+      .panel-body
+        /
+          <ul class="nav nav-pills task-filter">
+          <li ng-class="{'active' : show == 'All' }" ng-click="show='All'"><a href="">All</a></li>
+          <li ng-class="{'active' : show == 'Incomplete' }" ng-click="show='Incomplete'"><a href="">Incomplete</a></li>
+          <li ng-class="{'active' : show == 'Complete' }" ng-click="show='Complete'"><a href="">Complete</a></li>
+          </ul>
+        %ul.list-unstyled{"ui-sortable" => "projectSortableOptions"}
+          %li.animate-enter{"ng-repeat" => "task in project.tasks | filter :showTasks"}
+            {{ task.name }}
+  %li.animate-enter{"ng-if" => "results.length == 0"}
+    %strong No results found...
+.debug
+  Projects:
+  %p.text-info {{ projects | json}}

@@ -14,10 +14,13 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require bootstrap-sprockets
-//= require angular/angular
-//= require angular/angular-route
-//= require angular/angular-cookie
-//= require angular/ng-token-auth
-//= require angular/sortable
-//= require angular/main
+
+//= require angular
+//= require angular-route
+//= require angular-cookie
+//= require ng-token-auth
+//= require angular-ui-sortable
+//= require app/main
+//= require angular-rails-templates
+
 //= require_tree .

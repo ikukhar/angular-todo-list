@@ -27,6 +27,9 @@ gem 'responders', '~> 2.0' #??
 gem 'omniauth-github'
 gem 'omniauth-facebook'
 
+gem 'angular-rails-templates'
+gem 'bower-rails'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
