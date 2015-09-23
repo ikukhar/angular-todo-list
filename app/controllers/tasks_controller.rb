@@ -4,15 +4,7 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
-
-    render json: @tasks
-  end
-
-  # GET /tasks/1
-  # GET /tasks/1.json
-  def show
-    render json: @task
+    render json: Task.where(project_id: params[:project_id]).order('position desc')
   end
 
   # POST /tasks

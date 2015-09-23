@@ -10,15 +10,11 @@ class Project < ActiveRecord::Base
   validates :position, numericality: { greater_than: 0 }
   # validates :position, uniqueness: { scope: :user }
 
-  def to_json
-    super(include: :tasks)
-  end
-
   private
 
   def default_settings
     self.done ||= false
-    self.position ||= (Project.maximum(:position) + 1)
+    self.position ||= (Project.maximum(:position).to_i + 1)
   end
 
 end

@@ -6,8 +6,7 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     render json: Project.where(user_id: current_user).
-                         order('position desc').
-                         to_json(include: :tasks)
+                         order('position desc')
   end
 
   # POST /projects.json

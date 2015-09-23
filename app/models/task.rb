@@ -12,6 +12,7 @@ class Task < ActiveRecord::Base
 
   def default_settings
     self.done ||= false
+    self.position ||= (Task.where(project: self.project).maximum(:position).to_i + 1)
   end
 
   def update_project_done

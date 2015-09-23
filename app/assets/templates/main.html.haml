@@ -1,41 +1,79 @@
+%div{ :"ng-controller" => "ProjectsController" }
 
-%form.input-group{"ng-submit" => "addProject()"}
-  %input.form-control{"ng-model" => "newNameProject", :placeholder => "Add project", :type => "text"}/
-  %span.input-group-btn
-    %button.btn.btn-default{:type => "submit"}
-      %span.glyphicon.glyphicon-plus
-%p
-.project-form
-  %ul.list-unstyled{"ui-sortable" => "projectSortableOptions", "ng-model" => "projects" }
+  %form.input-group{ :"ng-submit" => "add()"}
+    %input.form-control{:"ng-model" => "newName",
+                        :placeholder => "Add project",
+                        :type => "text",
+                        :"ng-minlength" => 1}
+    %span.input-group-btn
+      %button.btn.btn-default{:type => "submit"}
+        %span.glyphicon.glyphicon-plus
 
-    %li{"id" => "{{project.id}}", "ng-repeat" => "project in projects | filter :search"}
-      .panel.panel-info
-        .panel-heading
+  %p
 
-          %span{ "ng-show" => "editingProject" }
-            %form{"ng-submit" => "updateProject(project); editingProject = false"}
+  .project-form
+    %ul.list-unstyled{ :"ui-sortable" => "sortableOptions", :"ng-model" => "projects" }
+
+      %li{ :"id" => "{{project.id}}", :"ng-repeat" => "project in projects | filter :search" }
+        .panel.panel-info
+          .panel-heading
+
+            %span{ :"ng-show" => "editing" }
+              %form{ :"ng-submit" => "update(project); editing = false" }
+                .input-group
+                  %input.form-control{ :"ng-model" => "project.name", :type => "text" }
+                  %span.input-group-btn
+                    %button.btn.btn-default{ :type => "submit" }
+                      %span.glyphicon.glyphicon-floppy-disk
+                    %button.btn.btn-default{ :"ng-click" => "editing = false", :type => "button"}
+                      %span.glyphicon.glyphicon-remove
+
+            %span{ :"ng-hide" => "editing" }
               .input-group
-                %input.form-control{"ng-model" => "project.name", :type => "text"}
+                .name
+                  {{ project.name }}
                 %span.input-group-btn
-                  %button.btn.btn-default{:type => "submit"}
-                    %span.glyphicon.glyphicon-floppy-disk
-                  %button.btn.btn-default{"ng-click" => "editingProject = false", :type => "button"}
+                  %button.btn.btn-default{ :"ng-click" => "editing = true", :"ng-hide" => "editing" }
+                    %span.glyphicon.glyphicon-pencil
+                  %button.btn.btn-default{ :"ng-click" => "remove(project)", :"ng-hide" => "editing"}
                     %span.glyphicon.glyphicon-remove
 
-          %span{ "ng-hide" => "editingProject" }
-            .input-group
-              .name
-                {{ project.name }}
-              %span.input-group-btn
-                %button.btn.btn-default{"ng-click" => "editingProject = true", "ng-hide" => "editingProject"}
-                  %span.glyphicon.glyphicon-pencil
-                %button.btn.btn-default{"ng-click" => "removeProject(project)", "ng-hide" => "editingProject"}
-                  %span.glyphicon.glyphicon-remove
+          .container
+            .col-sm-7
+              %div.nested{ :"ng-controller" => "TasksController" }
 
-        .panel-body
-          %ul.list-unstyled{"ui-sortable" => "projectSortableOptions", "ng-model" => "project.tasks"}
-            %li.animate-enter{"ng-repeat" => "task in project.tasks | filter :showTasks"}
-              {{ task.name }}
+                %form.input-group{ :"ng-submit" => "add()"}
+                  %input.form-control{:"ng-model" => "newName",
+                                      :placeholder => "Add task",
+                                      :type => "text",
+                                      :"ng-minlength" => 1}
+                  %span.input-group-btn
+                    %button.btn.btn-default{:type => "submit"}
+                      %span.glyphicon.glyphicon-plus
+
+                .panel-body
+                  %ul.list-unstyled{ :"ui-sortable" => "sortableOptions", :"ng-model" => "tasks" }
+                    %li.animate-enter{ :"ng-repeat" => "task in tasks | filter :search" }
+
+                      %span{ :"ng-show" => "editing" }
+                        %form{ :"ng-submit" => "update(task); editing = false" }
+                          .input-group
+                            %input.form-control{ :"ng-model" => "task.name", :type => "text" }
+                            %span.input-group-btn
+                              %button.btn.btn-default{ :type => "submit" }
+                                %span.glyphicon.glyphicon-floppy-disk
+                              %button.btn.btn-default{ :"ng-click" => "editing = false", :type => "button"}
+                                %span.glyphicon.glyphicon-remove
+
+                      %span{ :"ng-hide" => "editing" }
+                        .input-group
+                          .name
+                            {{ task.name }}
+                          %span.input-group-btn
+                            %button.btn.btn-default{ :"ng-click" => "editing = true", :"ng-hide" => "editing" }
+                              %span.glyphicon.glyphicon-pencil
+                            %button.btn.btn-default{ :"ng-click" => "remove(task)", :"ng-hide" => "editing"}
+                              %span.glyphicon.glyphicon-remove
 
 .debug
   Projects:
