@@ -1,35 +1,42 @@
-.alert.alert-danger{"ng-show" => "error", :role => "alert"}
-  {{error}}
-.input-group
-  %input.form-control{"ng-model" => "search", :placeholder => "Search project", :type => "search"}/
+
+%form.input-group{"ng-submit" => "addProject()"}
+  %input.form-control{"ng-model" => "newNameProject", :placeholder => "Add project", :type => "text"}/
   %span.input-group-btn
-    %button.btn.btn-default{:type => "button"}
-      %span.glyphicon.glyphicon-search
-      Search
+    %button.btn.btn-default{:type => "submit"}
+      %span.glyphicon.glyphicon-plus
 %p
-%form{"ng-submit" => "addProject()"}
-  .input-group
-    %input.form-control{"ng-model" => "newProject", :type => "text"}/
-    %span.input-group-btn
-      %button.btn.btn-default{:type => "submit"}
-        %span.glyphicon.glyphicon-plus
-        Add
-%ul.list-unstyled{"ui-sortable" => "projectSortableOptions"}
-  %li.animate-enter{"ng-repeat" => "project in projects | filter :search"}
-    .panel.panel-info
-      .panel-heading {{ project.name }}
-      .panel-body
-        /
-          <ul class="nav nav-pills task-filter">
-          <li ng-class="{'active' : show == 'All' }" ng-click="show='All'"><a href="">All</a></li>
-          <li ng-class="{'active' : show == 'Incomplete' }" ng-click="show='Incomplete'"><a href="">Incomplete</a></li>
-          <li ng-class="{'active' : show == 'Complete' }" ng-click="show='Complete'"><a href="">Complete</a></li>
-          </ul>
-        %ul.list-unstyled{"ui-sortable" => "projectSortableOptions"}
-          %li.animate-enter{"ng-repeat" => "task in project.tasks | filter :showTasks"}
-            {{ task.name }}
-  %li.animate-enter{"ng-if" => "results.length == 0"}
-    %strong No results found...
+.project-form
+  %ul.list-unstyled{"ui-sortable" => "projectSortableOptions", "ng-model" => "projects" }
+
+    %li{"id" => "{{project.id}}", "ng-repeat" => "project in projects | filter :search"}
+      .panel.panel-info
+        .panel-heading
+
+          %span{ "ng-show" => "editingProject" }
+            %form{"ng-submit" => "updateProject(project); editingProject = false"}
+              .input-group
+                %input.form-control{"ng-model" => "project.name", :type => "text"}
+                %span.input-group-btn
+                  %button.btn.btn-default{:type => "submit"}
+                    %span.glyphicon.glyphicon-floppy-disk
+                  %button.btn.btn-default{"ng-click" => "editingProject = false", :type => "button"}
+                    %span.glyphicon.glyphicon-remove
+
+          %span{ "ng-hide" => "editingProject" }
+            .input-group
+              .name
+                {{ project.name }}
+              %span.input-group-btn
+                %button.btn.btn-default{"ng-click" => "editingProject = true", "ng-hide" => "editingProject"}
+                  %span.glyphicon.glyphicon-pencil
+                %button.btn.btn-default{"ng-click" => "removeProject(project)", "ng-hide" => "editingProject"}
+                  %span.glyphicon.glyphicon-remove
+
+        .panel-body
+          %ul.list-unstyled{"ui-sortable" => "projectSortableOptions", "ng-model" => "project.tasks"}
+            %li.animate-enter{"ng-repeat" => "task in project.tasks | filter :showTasks"}
+              {{ task.name }}
+
 .debug
   Projects:
   %p.text-info {{ projects | json}}

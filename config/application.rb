@@ -34,7 +34,7 @@ module AngularTodoList
     config.generators.javascripts = false
     config.generators.helper = false
 
-    config.assets.paths << Rails.root.join("vendor","assets","bower_components","assets","fonts")
+    config.assets.paths << Rails.root.join("vendor","assets","bower_components","fonts")
 
   end
 end

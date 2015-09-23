@@ -1,77 +1,52 @@
-@todo_list.controller 'ProjectsController', ['$scope', '$location', '$http', ($scope, $location, $http) ->
+@todo_list.controller 'ProjectsController', ['$scope', '$location', 'Project', ($scope, $location, Project) ->
 
-  $scope.projects = []
-  $http.get('/api/projects').success((data) ->
-    $scope.projects = data
-  ).error( ->
-    $scope.error = data
-  )
-
-  # $scope.projects = [
-  #   {name: "Project 1", id: "1", tasks: [
-  #     {name: "Task 1", id: "1", isDone: 'true'}
-  #     {name: "Task 2", id: "2", isDone: 'false'}
-  #     {name: "Task 3", id: "3", isDone: 'false'}
-  #   ]},
-  #   {name: "Project 2", id: "2", tasks: [
-  #     {name: "Task 1", id: "4", isDone: 'false'}
-  #   ]}
-  # ]
+  $scope.editingProject = false
+  $scope.projects = Project.query()
 
   $scope.projectSortableOptions = {
     cursor : "move",
     update: (e, ui) ->
-      console.log e
-      console.log ui
+      console.log ui.item.parent().sortable( "toArray")
+		  # $scope.$apply(function(){
+		  #  $scope.currSort= $list.sortable( "toArray")
+      #
+		  # })
   }
 
   $scope.taskSortableOptions = {
     cursor : "move",
     update: (e, ui) ->
-      console.log e
-      console.log ui
   }
 
   $scope.addProject = ->
-    # TODO Client-side data validation
-    if $scope.newProject == ''
+    # TODO True validation
+    if $scope.newNameProject == ''
       alert('Name is blank.')
       return false
 
-    data =
-      project:
-        name: $scope.newProject
+    project = new Project
+    project.name = $scope.newNameProject
+    project.$save (result) ->
+      $scope.projects.unshift(result)
+      $scope.newNameProject = ""
 
-    $http.post('/api/projects.json', data).success((data) ->
+  $scope.updateProject = (project) ->
+    $scope.disableEditor()
+    # project.$update ->
 
-      $scope.projects.unshift(data)
-      $scope.newProject = ""
-      console.log('Successfully created post.')
+  $scope.enableEditor = ->
+    $scope.editingProject = true
+  $scope.disableEditor = ->
+    $scope.editingProject = false
 
-    ).error( ->
-      $scope.error = data
-    )
+  $scope.removeProject = (project) ->
+    project.$delete ->
+      projects = $scope.projects
+      index = projects.indexOf project
+      projects.splice index, 1
+      $scope.projects = projects
 
-  $scope.saveProject = (project) =>
-    # if $scope.newProject == ''
-    #   alert('Name is blank.')
-    #   return false
-    #
-    # data =
-    #   project:
-    #     name: $scope.name
-    #
-    # $http.post("/api/projects/#{project.id}", data).success((data) ->
-    #
-    #   $scope.projects.unshift(data)
-    #   $scope.newProject = ""
-    #   console.log('Successfully created post.')
-    #
-    # ).error( ->
-    #   $scope.error = data
-    # )
 
-  $scope.filtersTasks = { };
   $scope.show = 'Complete'
 
   $scope.showTasks = (task) ->

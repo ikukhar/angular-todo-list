@@ -1,5 +1,6 @@
 !!!
 %html{ :"ng-app" => "TodoList" }
+
   %head
     %title Angular Todo List
     = stylesheet_link_tag    'application', media: 'all'
@@ -7,14 +8,18 @@
     = csrf_meta_tags
     = favicon_link_tag '', href: '/assets/images/favicon.png'
     %base{href: "/"}
+
   %body.ng-cloak
     %nav.navbar.navbar-inverse
       .container
         .col-sm-8.col-sm-offset-2
+
           .navbar-header
             %a{ :"ng-href" => "/", class: 'navbar-brand' }
               Angular Todo List
+
           #navbar
+
             %ul.nav.navbar-nav.pull-right{ :"ng-controller" => "UserSessionsController" }
               %li.dropdown{ :"ng-show" => "user.signedIn" }
                 %a.dropdown-toggle{ :"data-toggle" => "dropdown", :"ng-href" => "#" }
@@ -34,10 +39,21 @@
               %li{ :"ng-show" => "!user.signedIn" }
                 %a{ :"ng-href" => "/sign_up" }
                   Sign Up
+
+            %form.navbar-form.pull-right{ role: "search" }
+              .form-group
+                %input.form-control{ "ng-model" => "search.name", :placeholder => "Search", :type => "search" }
+                %button.btn.btn-default{"ng-show" => "search.name.length", "ng-click" => "search = ''"}
+                  %span.glyphicon.glyphicon-remove
+                %button.btn.btn-default{"ng-hide" => "search.name.length", type: "submit"}
+                  %span.glyphicon.glyphicon-search
+
     .container
       .col-sm-8.col-sm-offset-2
+        .alert.alert-danger{"ng-show" => "error", :role => "alert"}
+          {{error}}
         .ng-view
-  
+
         .debug
           User:
           %p.text-info

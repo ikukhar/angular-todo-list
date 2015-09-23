@@ -20,6 +20,7 @@
 //= require angular-cookie
 //= require ng-token-auth
 //= require angular-ui-sortable
+//= require angular-resource
 //= require app/main
 //= require angular-rails-templates
 

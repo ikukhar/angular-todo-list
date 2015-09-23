@@ -10,17 +10,12 @@ class ProjectsController < ApplicationController
                          to_json(include: :tasks)
   end
 
-  # GET /projects/1.json
-  def show
-    render json: @project.to_json
-  end
-
   # POST /projects.json
   def create
     @project = Project.new(project_params)
 
     if @project.save
-      render :show, status: :created, location: @project
+      render json: @project.to_json, status: :created, location: @project
     else
       render json: @project.errors, status: :unprocessable_entity
     end
@@ -29,7 +24,7 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1.json
   def update
     if @project.update(project_params)
-      render :show, status: :ok, location: @project
+      render json: @project.to_json, status: :ok, location: @project
     else
       render json: @project.errors, status: :unprocessable_entity
     end

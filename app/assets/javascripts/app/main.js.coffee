@@ -2,7 +2,8 @@
 @todo_list = angular.module('TodoList', [
   'ngRoute',
   'ui.sortable',
-  'ng-token-auth'
+  'ng-token-auth',
+  'ngResource'
 ])
 
 @todo_list.config(['$routeProvider', '$locationProvider', ($routeProvider, $locationProvider) ->
@@ -34,12 +35,13 @@
 ])
 
 @todo_list.run (['$rootScope', '$location', '$auth', ($rootScope, $location, $auth) ->
-
-  $rootScope.$on( "$locationChangeSuccess", (e, next, current) ->
-    unless $rootScope.user.signedIn
-      unless $location.path().match(/\/sign_\w+/)
-        $location.path('/sign_in')
-  )
+  #TODO
+  # $rootScope.$on( "$locationChangeSuccess", (e, next, current) ->
+  #   console.log 'locationChangeSuccess: ' + $rootScope.user.signedIn
+  #   unless $rootScope.user.signedIn
+  #     unless $location.path().match(/\/sign_\w+/)
+  #       $location.path('/sign_in')
+  # )
 
   $rootScope.$on('auth:login-success', ->
     $location.path('/')
