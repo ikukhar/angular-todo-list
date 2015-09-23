@@ -2,8 +2,8 @@ class Task < ActiveRecord::Base
 
   belongs_to :project
 
-  after_save :update_project_done
   after_initialize :default_settings
+  after_save       :update_project_done
 
   validates :name, :project, presence: true
   validates_inclusion_of :done, in: [true, false]

@@ -1,16 +1,23 @@
-@todo_list.controller 'ProjectsController', ['$scope', '$location', 'Project', ($scope, $location, Project) ->
+@todo_list.controller 'ProjectsController', ['$scope', '$location', 'Project', '$filter', (
+                                              $scope, $location, Project, $filter) ->
 
   $scope.editingProject = false
   $scope.projects = Project.query()
 
   $scope.projectSortableOptions = {
     cursor : "move",
-    update: (e, ui) ->
-      console.log ui.item.parent().sortable( "toArray")
-		  # $scope.$apply(function(){
-		  #  $scope.currSort= $list.sortable( "toArray")
-      #
-		  # })
+    start: (e, ui) ->
+      $scope.beforeSortProjects = $scope.projects.slice()
+    ,
+    stop: (e, ui) ->
+      newPos = $scope.projects.length
+      for project in $scope.projects
+        # console.log id
+        res = $filter('filter')($scope.beforeSortProjects, {id: project.id}, false)
+        if res[0].position != newPos
+          project.position = newPos
+          $scope.updateProject(project)
+        newPos -= 1
   }
 
   $scope.taskSortableOptions = {
@@ -19,11 +26,6 @@
   }
 
   $scope.addProject = ->
-    # TODO True validation
-    if $scope.newNameProject == ''
-      alert('Name is blank.')
-      return false
-
     project = new Project
     project.name = $scope.newNameProject
     project.$save (result) ->
@@ -31,13 +33,7 @@
       $scope.newNameProject = ""
 
   $scope.updateProject = (project) ->
-    $scope.disableEditor()
-    # project.$update ->
-
-  $scope.enableEditor = ->
-    $scope.editingProject = true
-  $scope.disableEditor = ->
-    $scope.editingProject = false
+    project.$update ->
 
   $scope.removeProject = (project) ->
     project.$delete ->
@@ -45,7 +41,6 @@
       index = projects.indexOf project
       projects.splice index, 1
       $scope.projects = projects
-
 
   $scope.show = 'Complete'
 

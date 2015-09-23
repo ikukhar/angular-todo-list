@@ -6,7 +6,7 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     render json: Project.where(user_id: current_user).
-                         order('id desc').
+                         order('position desc').
                          to_json(include: :tasks)
   end
 
@@ -44,6 +44,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name).merge(user_id: current_user.id)
+      params.require(:project).permit(:name, :position).merge(user_id: current_user.id)
     end
 end
