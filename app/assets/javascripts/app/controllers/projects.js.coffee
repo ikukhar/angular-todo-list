@@ -13,7 +13,9 @@
       $scope.projects.unshift(result)
       $scope.newName = ""
     )
-  $scope.update = (project) ->
+  $scope.updateName = (project, editName) ->
+    return if editName.$error
+    project.name = editName
     project.$update ->
 
   $scope.remove = (project) ->

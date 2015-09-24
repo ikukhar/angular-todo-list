@@ -1,80 +1,19 @@
+
+
 %div{ :"ng-controller" => "ProjectsController" }
-
-  %form.input-group{ :"ng-submit" => "add()"}
-    %input.form-control{:"ng-model" => "newName",
-                        :placeholder => "Add project",
-                        :type => "text",
-                        :"ng-minlength" => 1}
-    %span.input-group-btn
-      %button.btn.btn-default{:type => "submit"}
-        %span.glyphicon.glyphicon-plus
-
-  %p
+  %div{ :"ng-include" => "'assets/_add_project.html'" }
 
   .project-form
     %ul.list-unstyled{ :"ui-sortable" => "sortableOptions", :"ng-model" => "projects" }
+      %li{ :"id" => "{{project.id}}", :"ng-repeat" => "project in projects" }
+        %div{ :"ng-include" => "'assets/_project.html'" }
 
-      %li{ :"id" => "{{project.id}}", :"ng-repeat" => "project in projects | filter :search" }
-        .panel.panel-info
-          .panel-heading
+        .container
+          .col-sm-7
+            %div{ :"ng-controller" => "TasksController" }
+              %div{ :"ng-include" => "'assets/_add_task.html'" }
 
-            %span{ :"ng-show" => "editing" }
-              %form{ :"ng-submit" => "update(project); editing = false" }
-                .input-group
-                  %input.form-control{ :"ng-model" => "project.name", :type => "text" }
-                  %span.input-group-btn
-                    %button.btn.btn-default{ :type => "submit" }
-                      %span.glyphicon.glyphicon-floppy-disk
-                    %button.btn.btn-default{ :"ng-click" => "editing = false", :type => "button"}
-                      %span.glyphicon.glyphicon-remove
-
-            %span{ :"ng-hide" => "editing" }
-              .input-group
-                .name
-                  {{ project.name }}
-                %span.input-group-btn
-                  %button.btn.btn-default{ :"ng-click" => "editing = true", :"ng-hide" => "editing" }
-                    %span.glyphicon.glyphicon-pencil
-                  %button.btn.btn-default{ :"ng-click" => "remove(project)", :"ng-hide" => "editing"}
-                    %span.glyphicon.glyphicon-remove
-
-          .container
-            .col-sm-7
-              %div.nested{ :"ng-controller" => "TasksController" }
-
-                %form.input-group{ :"ng-submit" => "add()"}
-                  %input.form-control{:"ng-model" => "newName",
-                                      :placeholder => "Add task",
-                                      :type => "text",
-                                      :"ng-minlength" => 1}
-                  %span.input-group-btn
-                    %button.btn.btn-default{:type => "submit"}
-                      %span.glyphicon.glyphicon-plus
-
-                .panel-body
-                  %ul.list-unstyled{ :"ui-sortable" => "sortableOptions", :"ng-model" => "tasks" }
-                    %li.animate-enter{ :"ng-repeat" => "task in tasks | filter :search" }
-
-                      %span{ :"ng-show" => "editing" }
-                        %form{ :"ng-submit" => "update(task); editing = false" }
-                          .input-group
-                            %input.form-control{ :"ng-model" => "task.name", :type => "text" }
-                            %span.input-group-btn
-                              %button.btn.btn-default{ :type => "submit" }
-                                %span.glyphicon.glyphicon-floppy-disk
-                              %button.btn.btn-default{ :"ng-click" => "editing = false", :type => "button"}
-                                %span.glyphicon.glyphicon-remove
-
-                      %span{ :"ng-hide" => "editing" }
-                        .input-group
-                          .name
-                            {{ task.name }}
-                          %span.input-group-btn
-                            %button.btn.btn-default{ :"ng-click" => "editing = true", :"ng-hide" => "editing" }
-                              %span.glyphicon.glyphicon-pencil
-                            %button.btn.btn-default{ :"ng-click" => "remove(task)", :"ng-hide" => "editing"}
-                              %span.glyphicon.glyphicon-remove
-
-.debug
-  Projects:
-  %p.text-info {{ projects | json}}
+              .panel-body
+                %ul.list-unstyled{ :"ui-sortable" => "sortableOptions", :"ng-model" => "tasks" }
+                  %li.animate-enter{ :"ng-repeat" => "task in tasks" }
+                    %div{ :"ng-include" => "'assets/_task.html'" }

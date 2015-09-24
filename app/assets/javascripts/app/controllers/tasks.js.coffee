@@ -3,27 +3,28 @@
 
   $scope.project = $scope.$parent.project
   $scope.newName = ''
-  $scope.editing = false
   $scope.tasks = Task.query(project_id: $scope.project.id)
 
   $scope.add = ->
     return if $scope.newName.$error
+    console.log $scope.newName
     task = new Task
     task.project_id = $scope.project.id
     task.name = $scope.newName
     task.$save (result) ->
-      $scope.project.tasks.unshift(result)
+      $scope.tasks.unshift(result)
       $scope.newName = ""
 
-  $scope.update = (task) ->
+  $scope.updateName = (task, editName) ->
+    task.name = editName
     task.$update ->
 
   $scope.remove = (task) ->
     task.$delete ->
-      tasks = $scope.project.tasks
+      tasks = $scope.tasks
       index = tasks.indexOf project
       tasks.splice index, 1
-      $scope.project.tasks = tasks
+      $scope.tasks = tasks
 
   $scope.sortableOptions = {
     cursor : "move",

@@ -1,0 +1,22 @@
+.panel.panel-info
+  .panel-heading
+
+    %span{ :"ng-show" => "editing" }
+      %form{ :"ng-submit" => "updateName(project, editName); editing = false" }
+        .input-group
+          %input.form-control{ :"ng-model" => "editName", :type => "text" ,:required => true }
+          %span.input-group-btn
+            %button.btn.btn-default{ :type => "submit" }
+              %span.glyphicon.glyphicon-floppy-disk
+            %button.btn.btn-default{ :"ng-click" => "editing = false", :type => "button"}
+              %span.glyphicon.glyphicon-remove
+
+    %span{ :"ng-hide" => "editing" }
+      .input-group
+        .name
+          {{ project.name }}
+        %span.input-group-btn
+          %button.btn.btn-default{ :"ng-click" => "editName = project.name; editing = true", :"ng-hide" => "editing" }
+            %span.glyphicon.glyphicon-pencil
+          %button.btn.btn-default{ :"ng-click" => "remove(project)", :"ng-hide" => "editing"}
+            %span.glyphicon.glyphicon-remove
