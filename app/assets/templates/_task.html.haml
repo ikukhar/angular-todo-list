@@ -1,5 +1,6 @@
+
 %span{ :"ng-show" => "editing" }
-  %form{ :"ng-submit" => "updateName(task, editName); editing = false" }
+  %form{ :"ng-submit" => "task.name = editName; update(task, editName); editing = false" }
     .input-group
       %input.form-control{ :"ng-model" => "editName", :type => "text" ,:required => true}
       %span.input-group-btn
@@ -10,6 +11,8 @@
 
 %span{ :"ng-hide" => "editing" }
   .input-group
+    %span.input-group-addon
+      %input{ :"ng-model" => "task.done", :"ng-change" => "update(task); changeProjectDone()", :type => "checkbox" }
     .name
       {{ task.name }}
     %span.input-group-btn

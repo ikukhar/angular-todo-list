@@ -17,3 +17,8 @@
                 %ul.list-unstyled{ :"ui-sortable" => "sortableOptions", :"ng-model" => "tasks" }
                   %li.animate-enter{ :"ng-repeat" => "task in tasks" }
                     %div{ :"ng-include" => "'assets/_task.html'" }
+
+  .debug
+    Projects:
+    %p.text-info
+      {{ projects | json}}

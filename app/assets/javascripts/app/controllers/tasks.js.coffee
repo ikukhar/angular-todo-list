@@ -2,21 +2,16 @@
                                            $scope, $location, Task, $filter) ->
 
   $scope.project = $scope.$parent.project
-  $scope.newName = ''
   $scope.tasks = Task.query(project_id: $scope.project.id)
 
-  $scope.add = ->
-    return if $scope.newName.$error
-    console.log $scope.newName
+  $scope.add = (name) ->
     task = new Task
     task.project_id = $scope.project.id
-    task.name = $scope.newName
+    task.name = name
     task.$save (result) ->
       $scope.tasks.unshift(result)
-      $scope.newName = ""
 
-  $scope.updateName = (task, editName) ->
-    task.name = editName
+  $scope.update = (task) ->
     task.$update ->
 
   $scope.remove = (task) ->
@@ -25,6 +20,10 @@
       index = tasks.indexOf project
       tasks.splice index, 1
       $scope.tasks = tasks
+
+  $scope.changeProjectDone = ->
+    res = $filter('filter')($scope.tasks, {done: false}, false)
+    $scope.$parent.project.done = (res.length == 0 ?  true : false)
 
   $scope.sortableOptions = {
     cursor : "move",

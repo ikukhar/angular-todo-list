@@ -1,5 +1,5 @@
-%form.input-group{ :"ng-submit" => "add()"}
-  %input.form-control{:"ng-model" => "newName",
+%form.input-group{ :"ng-submit" => "add(name); name=''"}
+  %input.form-control{:"ng-model" => "name",
                       :placeholder => "Add project",
                       :type => "text",
                       :required => true }

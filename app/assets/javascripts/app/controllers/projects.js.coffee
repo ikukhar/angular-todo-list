@@ -1,21 +1,15 @@
 @todo_list.controller 'ProjectsController', ['$scope', '$location', 'Project', '$filter', (
                                               $scope, $location, Project, $filter) ->
 
-  $scope.newName = ''
-  $scope.editing = false
   $scope.projects = Project.query()
 
-  $scope.add = ->
-    return if $scope.newName.$error
+  $scope.add = (name) ->
     project = new Project
-    project.name = $scope.newName
-    project.$save({ test: true } ,(result) ->
+    project.name = name
+    project.$save (result) ->
       $scope.projects.unshift(result)
-      $scope.newName = ""
-    )
-  $scope.updateName = (project, editName) ->
-    return if editName.$error
-    project.name = editName
+
+  $scope.update = (project) ->
     project.$update ->
 
   $scope.remove = (project) ->
