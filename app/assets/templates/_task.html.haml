@@ -1,4 +1,17 @@
 
+
+%span{ :"ng-hide" => "editing", :"ng-mouseenter" => "showButtons = true", :"ng-mouseleave" => "showButtons = false" }
+  .input-group
+    %span.input-group-addon
+      %input{ :"ng-model" => "task.done", :"ng-change" => "update(task); changeProjectDone()", :type => "checkbox" }
+    .name
+      {{ task.name }}
+    %span.input-group-btn{ :"ng-show" => "showButtons" }
+      %button.btn.btn-default{ :"ng-click" => "editName = task.name; editing = true", :"ng-hide" => "editing" }
+        %span.glyphicon.glyphicon-pencil
+      %button.btn.btn-default{ :"ng-click" => "remove(task)", :"ng-hide" => "editing"}
+        %span.glyphicon.glyphicon-remove
+
 %span{ :"ng-show" => "editing" }
   %form{ :"ng-submit" => "task.name = editName; update(task, editName); editing = false" }
     .input-group
@@ -8,15 +21,3 @@
           %span.glyphicon.glyphicon-floppy-disk
         %button.btn.btn-default{ :"ng-click" => "editing = false", :type => "button"}
           %span.glyphicon.glyphicon-remove
-
-%span{ :"ng-hide" => "editing" }
-  .input-group
-    %span.input-group-addon
-      %input{ :"ng-model" => "task.done", :"ng-change" => "update(task); changeProjectDone()", :type => "checkbox" }
-    .name
-      {{ task.name }}
-    %span.input-group-btn
-      %button.btn.btn-default{ :"ng-click" => "editName = task.name; editing = true", :"ng-hide" => "editing" }
-        %span.glyphicon.glyphicon-pencil
-      %button.btn.btn-default{ :"ng-click" => "remove(task)", :"ng-hide" => "editing"}
-        %span.glyphicon.glyphicon-remove
