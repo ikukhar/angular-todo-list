@@ -17,7 +17,7 @@
   $scope.remove = (task) ->
     task.$delete ->
       tasks = $scope.tasks
-      index = tasks.indexOf project
+      index = tasks.indexOf task
       tasks.splice index, 1
       $scope.tasks = tasks
 

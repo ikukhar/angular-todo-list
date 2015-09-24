@@ -40,14 +40,6 @@
                 %a{ :"ng-href" => "/sign_up" }
                   Sign Up
 
-            %form.navbar-form.pull-right{ role: "search" }
-              .form-group
-                %input.form-control{ "ng-model" => "search.name", :placeholder => "Search", :type => "search" }
-                %button.btn.btn-default{"ng-show" => "search.name.length", "ng-click" => "search = ''"}
-                  %span.glyphicon.glyphicon-remove
-                %button.btn.btn-default{"ng-hide" => "search.name.length", type: "submit"}
-                  %span.glyphicon.glyphicon-search
-
     .container
       .col-sm-8.col-sm-offset-2
         .alert.alert-danger{"ng-show" => "error", :role => "alert"}
