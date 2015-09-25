@@ -1,9 +1,11 @@
-
-%form.input-group{ :"ng-submit" => "add(name); name=''"}
-  %input.form-control{:"ng-model" => "name",
-                      :placeholder => "Add project",
-                      :type => "text",
-                      :required => true }
-  %span.input-group-btn
-    %button.btn.btn-default{:type => "submit"}
-      %span.glyphicon.glyphicon-plus
+.new-project
+  %button.btn.btn-info{ :"ng-hide" => "adding", :"ng-click" => "adding = true;" }
+    Add project
+  %form.input-group{ :"ng-show" => "adding", :"ng-submit" => "add(name); name=''; adding = false"}
+    %input.form-control{ :"ng-model" => "name",
+                         :placeholder => "Type project name",
+                         :type => "text",
+                         :required => true }
+    %span.input-group-btn
+      %button.btn.btn-success.confirmation-btn{:type => "submit"} Save
+      %button.btn.btn-default.confirmation-btn{:"ng-click" => "adding = false", :type => "button"} Cansel

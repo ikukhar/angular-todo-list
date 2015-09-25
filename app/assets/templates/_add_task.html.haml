@@ -1,8 +1,9 @@
-%form.input-group{ :"ng-submit" => "add(name); name=''"}
-  %input.form-control{:"ng-model" => "name",
-                      :placeholder => "Add task",
-                      :type => "text",
-                      :required => true }
-  %span.input-group-btn
-    %button.btn.btn-default{:type => "submit"}
-      %span.glyphicon.glyphicon-plus
+.new-task
+  %form.input-group{ :"ng-show" => "project.addingTask", :"ng-submit" => "add(name); name=''; adding = false"}
+    %input.form-control{ :"ng-model" => "name",
+                         :placeholder => "Type task name",
+                         :type => "text",
+                         :required => true }
+    %span.input-group-btn
+      %button.btn.btn-success.panel-btn{:type => "submit"} Save
+      %button.btn.btn-default.panel-btn{:"ng-click" => "project.addingTask = false", :type => "button"} Cansel

@@ -1,23 +1,16 @@
 
-
-%span{ :"ng-hide" => "editing", :"ng-mouseenter" => "showButtons = true", :"ng-mouseleave" => "showButtons = false" }
-  .input-group
-    %span.input-group-addon
-      %input{ :"ng-model" => "task.done", :"ng-change" => "update(task); changeProjectDone()", :type => "checkbox" }
-    .name
+%div{ :"ng-hide" => "editing", :"ng-mouseenter" => "showButtons = true", :"ng-mouseleave" => "showButtons = false" }
+  %div{ :"ng-class" => "{ 'task': !task.done, 'task done': task.done }"}
+    %input.task-check{ :"ng-model" => "task.done", :"ng-change" => "update(task); changeProjectDone()", :type => "checkbox" }
+    .name{ :"ng-click" => "editName = task.name; editing = true" }
       {{ task.name }}
     %span.input-group-btn{ :"ng-show" => "showButtons" }
-      %button.btn.btn-default{ :"ng-click" => "editName = task.name; editing = true", :"ng-hide" => "editing" }
-        %span.glyphicon.glyphicon-pencil
-      %button.btn.btn-default{ :"ng-click" => "remove(task)", :"ng-hide" => "editing"}
-        %span.glyphicon.glyphicon-remove
+      %button.btn.btn-success.panel-btn{ :"ng-click" => ""} Add message
+      %button.btn.btn-info.panel-btn{ :"ng-click" => ""} Shedule
+      %button.btn.btn-default.panel-btn{ :"ng-click" => "remove(task)"} Delete
 
-%span{ :"ng-show" => "editing" }
+%div{ :"ng-show" => "editing" }
   %form{ :"ng-submit" => "task.name = editName; update(task, editName); editing = false" }
-    .input-group
-      %input.form-control{ :"ng-model" => "editName", :type => "text" ,:required => true}
-      %span.input-group-btn
-        %button.btn.btn-default{ :type => "submit" }
-          %span.glyphicon.glyphicon-floppy-disk
-        %button.btn.btn-default{ :"ng-click" => "editing = false", :type => "button"}
-          %span.glyphicon.glyphicon-remove
+    %input.form-control{ :"ng-model" => "editName", :type => "text" ,:required => true}
+    %button.btn.btn-success.panel-btn{:type => "submit"} Save
+    %button.btn.btn-default.panel-btn{:"ng-click" => "editing = false", :type => "button"} Cansel

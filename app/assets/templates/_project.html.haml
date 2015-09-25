@@ -1,23 +1,18 @@
-.panel
-  %div{ :"ng-class" => "{ 'panel-info': !project.done, 'panel-default': project.done }"}
-    .panel-heading
+%div
+  .panel.panel-default.project
+    .panel-heading.project{ :"ng-mouseenter" => "showButtons = true",
+                            :"ng-mouseleave" => "showButtons = false" }
 
-      %span{ :"ng-hide" => "editing", :"ng-mouseenter" => "showButtons = true", :"ng-mouseleave" => "showButtons = false" }
+      .input-group.project{ :"ng-hide" => "editing" }
+        %span.name{ :"ng-click" => "editName = project.name; editing = true", :"ng-class" => "{ 'project': !project.done, 'project done': project.done }" }
+          {{ project.name }}
+        %span.input-group-btn{ :"ng-show" => "showButtons" }
+          %button.btn.btn-primary.panel-btn{ :"ng-hide" => "project.addingTask", :"ng-click" => "project.addingTask = true" } Add task
+          %button.btn.btn-default.panel-btn{ :"ng-hide" => "project.addingTask", :"ng-click" => "remove(project)" } Delete
+
+      %form{ :"ng-show" => "editing", :"ng-submit" => "project.name = editName; update(project); editing = false" }
         .input-group
-          .name
-            {{ project.name }}
-          %span.input-group-btn{ :"ng-show" => "showButtons" }
-            %button.btn.btn-default{ :"ng-click" => "editName = project.name; editing = true", :"ng-hide" => "editing" }
-              %span.glyphicon.glyphicon-pencil
-            %button.btn.btn-default{ :"ng-click" => "remove(project)", :"ng-hide" => "editing"}
-              %span.glyphicon.glyphicon-remove
-
-      %span{ :"ng-show" => "editing" }
-        %form{ :"ng-submit" => "project.name = editName; update(project); editing = false" }
-          .input-group
-            %input.form-control{ :"ng-model" => "editName", :type => "text" ,:required => true }
-            %span.input-group-btn
-              %button.btn.btn-default{ :type => "submit" }
-                %span.glyphicon.glyphicon-floppy-disk
-              %button.btn.btn-default{ :"ng-click" => "editing = false", :type => "button"}
-                %span.glyphicon.glyphicon-remove
+          %input.form-control{ :"ng-model" => "editName", :type => "text" ,:required => true }
+          %span.input-group-btn
+            %button.btn.btn-success.panel-btn{:type => "submit"} Save
+            %button.btn.btn-default.panel-btn{:"ng-click" => "editing = false", :type => "button"} Cansel

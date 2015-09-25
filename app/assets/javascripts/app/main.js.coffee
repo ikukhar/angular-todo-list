@@ -50,4 +50,5 @@
   $rootScope.$on('auth:logout-success', ->
     $location.path('/sign_in')
   )
+
 ])

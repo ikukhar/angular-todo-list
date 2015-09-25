@@ -3,20 +3,17 @@
 %div{ :"ng-controller" => "ProjectsController" }
   %div{ :"ng-include" => "'assets/_add_project.html'" }
 
-  .project-form
-    %ul.list-unstyled{ :"ui-sortable" => "sortableOptions", :"ng-model" => "projects" }
-      %li{ :"id" => "{{project.id}}", :"ng-repeat" => "project in projects" }
-        %div{ :"ng-include" => "'assets/_project.html'" }
+  %ul.list-unstyled{ :"ui-sortable" => "sortableOptions", :"ng-model" => "projects" }
+    %li.project-form{ :"id" => "{{project.id}}", :"ng-repeat" => "project in projects" }
+      %div{ :"ng-include" => "'assets/_project.html'" }
 
-        .container
-          .col-sm-7
-            %div{ :"ng-controller" => "TasksController" }
-              %div{ :"ng-include" => "'assets/_add_task.html'" }
+      %div{ :"ng-controller" => "TasksController" }
+        %div{ :"ng-include" => "'assets/_add_task.html'" }
 
-              .panel-body
-                %ul.list-unstyled{ :"ui-sortable" => "sortableOptions", :"ng-model" => "tasks" }
-                  %li.animate-enter{ :"ng-repeat" => "task in tasks" }
-                    %div{ :"ng-include" => "'assets/_task.html'" }
+
+        %ul.list-unstyled{ :"ui-sortable" => "sortableOptions", :"ng-model" => "tasks" }
+          %li.task-form.animate-enter{ :"ng-repeat" => "task in tasks" }
+            %div{ :"ng-include" => "'assets/_task.html'" }
 
   .debug
     Projects:

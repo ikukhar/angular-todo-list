@@ -2,6 +2,7 @@
                                               $scope, $location, Project, $filter) ->
 
   $scope.projects = Project.query()
+  $scope.addingTask = false
 
   $scope.add = (name) ->
     project = new Project
