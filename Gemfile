@@ -27,7 +27,8 @@ gem 'omniauth-facebook'
 gem 'cancancan', '~> 1.10'
 gem 'paperclip', '~> 4.3'
 
-gem 'angular-rails-templates'
+# gem 'angular-rails-templates', '0.1.2'
+# gem 'htmlcompressor'
 gem 'bower-rails'
 
 group :development, :test do

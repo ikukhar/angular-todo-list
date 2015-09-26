@@ -22,7 +22,6 @@
 //= require angular-ui-sortable
 //= require angular-resource
 //= require app/main
-//= require angular-rails-templates
 //= require angular-bootstrap
 //= require ng-file-upload
 

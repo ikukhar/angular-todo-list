@@ -1,19 +1,19 @@
 
 
 %div{ :"ng-controller" => "ProjectsController" }
-  %div{ :"ng-include" => "'assets/_add_project.html'" }
+  =render 'add_project'
 
   %ul.list-unstyled{ :"ui-sortable" => "sortableOptions", :"ng-model" => "projects" }
     %li.project-form{ :"id" => "{{project.id}}", :"ng-repeat" => "project in projects" }
-      %div{ :"ng-include" => "'assets/_project.html'" }
+      =render 'project'
 
       %div{ :"ng-controller" => "TasksController" }
-        %div{ :"ng-include" => "'assets/_add_task.html'" }
+        =render 'add_task'
 
         %ul.list-unstyled{ :"ui-sortable" => "sortableOptions", :"ng-model" => "tasks" }
           %li.wrap-task-form.animate-enter{ :"ng-repeat" => "task in tasks" }
             %div.task-form{ :"ng-class" => "{ 'open-task': task.openingTask }"}
-              %div{ :"ng-include" => "'assets/_task.html'" }
+              =render 'task'
 
               %div{ :"ng-controller" => "MessagesController" }
-                %div{ :"ng-include" => "'assets/_messages.html'" }
+                =render 'messages'

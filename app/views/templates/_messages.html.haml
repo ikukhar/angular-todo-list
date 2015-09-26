@@ -25,10 +25,11 @@
       %div{ :"ng-show" => "uloading" }
         %button{ :type => "file",
                 :"ngf-select" => "upload($file)",
-                :"ngf-max-size" => "10MB"} Select File
+                :"ngf-max-size" => "10MB"}
+          Select File
         File: {{f.name}} {{f.$error}} {{f.$errorParam}}
-        %span.progress{ :"ng-show" => "f.progress >= 0"}
-          %div{ style: => "width:{{f.progress}}%", :"ng-bind" => "f.progress + '%'"
+        %span.progress{ :"ng-show" => "f.progress >= 0" }
+          %div{ :style => "width:{{f.progress}}%", :"ng-bind" => "f.progress + '%'" }
 
 
   %form.input-group.confirmable-form{ :"ng-submit" => "add(text); text=''"}

@@ -13,7 +13,7 @@
 
   $routeProvider
     .when('/', {
-      templateUrl: '/assets/main.html',
+      templateUrl: '/templates/index',
       controller: 'ProjectsController',
       resolve: {
         auth: ['$auth', ($auth) ->
@@ -22,11 +22,11 @@
       }
     })
     .when('/sign_in', {
-      templateUrl: '/assets/user_sessions/new.html',
+      templateUrl: '/templates/sign_in',
       controller: 'UserSessionsController'
     })
     .when('/sign_up', {
-      templateUrl: '/assets/user_registrations/new.html',
+      templateUrl: '/templates/sign_up',
       controller: 'UserRegistrationsController'
     })
     .otherwise({
@@ -39,11 +39,11 @@
 
 @todo_list.run (['$rootScope', '$location', '$auth', ($rootScope, $location, $auth) ->
 
-  $rootScope.$on( "$locationChangeSuccess", (e, next, current) ->
-    unless $rootScope.user.signedIn
-      unless $location.path().match(/\/sign_\w+/)
-        $location.path('/sign_in')
-  )
+  # $rootScope.$on( "$locationChangeSuccess", (e, next, current) ->
+  #   unless $rootScope.user.signedIn
+  #     unless $location.path().match(/\/sign_\w+/)
+  #       $location.path('/sign_in')
+  # )
 
   $rootScope.$on('auth:login-success', ->
     $location.path('/')
