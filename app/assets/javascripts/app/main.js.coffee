@@ -4,7 +4,8 @@
   'ui.sortable',
   'ng-token-auth',
   'ngResource',
-  "ui.bootstrap"
+  'ui.bootstrap',
+  'ngFileUpload'
 ])
 
 @todo_list.config(['$routeProvider', '$locationProvider', '$httpProvider', (
@@ -34,21 +35,15 @@
 
   $locationProvider.html5Mode(true)
 
-  # $httpProvider.defaults.transformResponse.push( (responseData) ->
-  #       convertDateStringsToDates(responseData)
-  #       responseData
-  # )
-
 ])
 
 @todo_list.run (['$rootScope', '$location', '$auth', ($rootScope, $location, $auth) ->
-  #TODO
-  # $rootScope.$on( "$locationChangeSuccess", (e, next, current) ->
-  #   console.log 'locationChangeSuccess: ' + $rootScope.user.signedIn
-  #   unless $rootScope.user.signedIn
-  #     unless $location.path().match(/\/sign_\w+/)
-  #       $location.path('/sign_in')
-  # )
+
+  $rootScope.$on( "$locationChangeSuccess", (e, next, current) ->
+    unless $rootScope.user.signedIn
+      unless $location.path().match(/\/sign_\w+/)
+        $location.path('/sign_in')
+  )
 
   $rootScope.$on('auth:login-success', ->
     $location.path('/')

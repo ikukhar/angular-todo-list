@@ -24,5 +24,6 @@
 //= require app/main
 //= require angular-rails-templates
 //= require angular-bootstrap
+//= require ng-file-upload
 
 //= require_tree .

@@ -22,4 +22,7 @@
       msgs.splice index, 1
       $scope.messages = msgs
       $scope.task.msg_count -= 1
+
+   $scope.upload = (file) ->
+
 ]

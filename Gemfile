@@ -25,6 +25,7 @@ gem 'omniauth',  '>= 1.0.0'
 gem 'omniauth-github'
 gem 'omniauth-facebook'
 gem 'cancancan', '~> 1.10'
+gem 'paperclip', '~> 4.3'
 
 gem 'angular-rails-templates'
 gem 'bower-rails'

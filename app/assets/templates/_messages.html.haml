@@ -9,6 +9,8 @@
               {{ message.text }}
 
           %span.input-group-btn{ :"ng-show" => "showButtons" }
+            %button.btn.btn-info.panel-btn-mini{ :"ng-click" => "uploading=!uploading"}
+              %span.glyphicon.glyphicon-paperclip
             %button.btn.btn-default.panel-btn-mini{ :"ng-click" => "remove(task)"}
               %span.glyphicon.glyphicon-remove
 
@@ -19,6 +21,14 @@
           %span.input-group-btn
             %button.btn.btn-success.panel-btn{:type => "submit"} Save
             %button.btn.btn-default.panel-btn{:"ng-click" => "editing = false", :type => "button"} Cancel
+
+      %div{ :"ng-show" => "uloading" }
+        %button{ :type => "file",
+                :"ngf-select" => "upload($file)",
+                :"ngf-max-size" => "10MB"} Select File
+        File: {{f.name}} {{f.$error}} {{f.$errorParam}}
+        %span.progress{ :"ng-show" => "f.progress >= 0"}
+          %div{ style: => "width:{{f.progress}}%", :"ng-bind" => "f.progress + '%'"
 
 
   %form.input-group.confirmable-form{ :"ng-submit" => "add(text); text=''"}
