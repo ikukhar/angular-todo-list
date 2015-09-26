@@ -8,11 +8,12 @@
           {{ project.name }}
         %span.input-group-btn{ :"ng-show" => "showButtons" }
           %button.btn.btn-primary.panel-btn{ :"ng-hide" => "project.addingTask", :"ng-click" => "project.addingTask = true" } Add task
-          %button.btn.btn-default.panel-btn{ :"ng-hide" => "project.addingTask", :"ng-click" => "remove(project)" } Delete
+          %button.btn.btn-default.panel-btn-mini{ :"ng-hide" => "project.addingTask", :"ng-click" => "remove(project)" }
+            %span.glyphicon.glyphicon-remove
 
       %form{ :"ng-show" => "editing", :"ng-submit" => "project.name = editName; update(project); editing = false" }
         .input-group
           %input.form-control{ :"ng-model" => "editName", :type => "text" ,:required => true }
           %span.input-group-btn
             %button.btn.btn-success.panel-btn{:type => "submit"} Save
-            %button.btn.btn-default.panel-btn{:"ng-click" => "editing = false", :type => "button"} Cansel
+            %button.btn.btn-default.panel-btn{:"ng-click" => "editing = false", :type => "button"} Cancel

@@ -7,6 +7,7 @@
     "angular-resource": "latest",
     "angular-ui-sortable": "latest",
     "ng-token-auth": "latest",
-    "jquery-ui": "latest"
+    "jquery-ui": "latest",
+    "angular-bootstrap": "latest"
   }
 }

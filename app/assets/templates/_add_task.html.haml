@@ -1,9 +1,8 @@
-.new-task
-  %form.input-group{ :"ng-show" => "project.addingTask", :"ng-submit" => "add(name); name=''; adding = false"}
-    %input.form-control{ :"ng-model" => "name",
-                         :placeholder => "Type task name",
-                         :type => "text",
-                         :required => true }
-    %span.input-group-btn
-      %button.btn.btn-success.panel-btn{:type => "submit"} Save
-      %button.btn.btn-default.panel-btn{:"ng-click" => "project.addingTask = false", :type => "button"} Cansel
+%form.input-group.confirmable-form{ :"ng-show" => "project.addingTask", :"ng-submit" => "add(name); name=''; project.addingTask = false"}
+  %input.form-control{ :"ng-model" => "name",
+                       :placeholder => "Type task name",
+                       :type => "text",
+                       :required => true }
+  %span.input-group-btn
+    %button.btn.btn-success.panel-btn{:type => "submit"} Save
+    %button.btn.btn-default.panel-btn{:"ng-click" => "project.addingTask = false", :type => "button"} Cancel

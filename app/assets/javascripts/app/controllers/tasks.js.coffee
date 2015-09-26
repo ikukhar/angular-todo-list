@@ -4,6 +4,19 @@
   $scope.project = $scope.$parent.project
   $scope.tasks = Task.query(project_id: $scope.project.id)
 
+
+  $scope.getDate = (deadline) ->
+    if deadline
+      new Date deadline
+    else
+      new Date
+
+  $scope.showTask = (task) ->
+    if task.deadline
+      task.name + " ("+$filter('date')(task.deadline, "dd-MM-yyyy")+")"
+    else
+      task.name
+
   $scope.add = (name) ->
     task = new Task
     task.project_id = $scope.project.id
@@ -39,4 +52,5 @@
           $scope.update(task)
         newPos -= 1
   }
+
 ]

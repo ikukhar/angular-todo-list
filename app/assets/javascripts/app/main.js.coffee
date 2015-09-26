@@ -3,10 +3,12 @@
   'ngRoute',
   'ui.sortable',
   'ng-token-auth',
-  'ngResource'
+  'ngResource',
+  "ui.bootstrap"
 ])
 
-@todo_list.config(['$routeProvider', '$locationProvider', ($routeProvider, $locationProvider) ->
+@todo_list.config(['$routeProvider', '$locationProvider', '$httpProvider', (
+                    $routeProvider, $locationProvider, $httpProvider) ->
 
   $routeProvider
     .when('/', {
@@ -31,6 +33,11 @@
     })
 
   $locationProvider.html5Mode(true)
+
+  # $httpProvider.defaults.transformResponse.push( (responseData) ->
+  #       convertDateStringsToDates(responseData)
+  #       responseData
+  # )
 
 ])
 

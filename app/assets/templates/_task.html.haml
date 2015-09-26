@@ -1,16 +1,41 @@
+%div.task-form{ :"ng-class" => "{ 'open-task': openingTask }"}
+  %div{ :"ng-hide" => "editing", :"ng-mouseenter" => "showButtons = true", :"ng-mouseleave" => "showButtons = false" }
+    %div{ :"ng-class" => "{ 'task': !task.done, 'task done': task.done }"}
 
-%div{ :"ng-hide" => "editing", :"ng-mouseenter" => "showButtons = true", :"ng-mouseleave" => "showButtons = false" }
-  %div{ :"ng-class" => "{ 'task': !task.done, 'task done': task.done }"}
-    %input.task-check{ :"ng-model" => "task.done", :"ng-change" => "update(task); changeProjectDone()", :type => "checkbox" }
-    .name{ :"ng-click" => "editName = task.name; editing = true" }
-      {{ task.name }}
-    %span.input-group-btn{ :"ng-show" => "showButtons" }
-      %button.btn.btn-success.panel-btn{ :"ng-click" => ""} Add message
-      %button.btn.btn-info.panel-btn{ :"ng-click" => ""} Shedule
-      %button.btn.btn-default.panel-btn{ :"ng-click" => "remove(task)"} Delete
+      %input.task-check{ :"ng-model" => "task.done", :"ng-change" => "update(task); changeProjectDone()", :type => "checkbox" }
 
-%div{ :"ng-show" => "editing" }
-  %form{ :"ng-submit" => "task.name = editName; update(task, editName); editing = false" }
-    %input.form-control{ :"ng-model" => "editName", :type => "text" ,:required => true}
-    %button.btn.btn-success.panel-btn{:type => "submit"} Save
-    %button.btn.btn-default.panel-btn{:"ng-click" => "editing = false", :type => "button"} Cansel
+      .wrap-name
+        %span.name{ :"ng-click" => "editName = task.name; editing = true" }
+          {{ showTask(task)}}
+
+      %span.input-group-btn{ :"ng-show" => "showButtons" }
+        %button.btn.btn-success.panel-btn-mini{ :"ng-click" => ""}
+          %span.glyphicon.glyphicon-envelope
+        %button.btn.btn-danger.panel-btn-mini{ :type => "button",
+            :"ng-click" => "editingDeadline = !editingDeadline; editDeadline = getDate(task.deadline); openingTask = !openingTask" }
+          %span.glyphicon.glyphicon-calendar
+        %button.btn.btn-default.panel-btn-mini{ :"ng-click" => "remove(task)"}
+          %span.glyphicon.glyphicon-remove
+
+
+  %div{ :"ng-show" => "editing" }
+    %form.input-group{ :"ng-submit" => "task.name = editName; update(task, editName); editing = false" }
+      %input.form-control{ :"ng-model" => "editName", :type => "text" ,:required => true}
+      %span.input-group-btn
+        %button.btn.btn-success.panel-btn{:type => "submit"} Save
+        %button.btn.btn-default.panel-btn{:"ng-click" => "editing = false", :type => "button"} Cancel
+
+  %div{ :"ng-show" => "editingDeadline" }
+    %form.input-group.confirmable-form{ :"ng-submit" => "task.deadline = editDeadline; update(task, editName); editingDeadline = false; openingTask = false" }
+      %input.form-control{ :type => "date",
+                         :"datepicker-popup" => true,
+                         :"ng-model" => "editDeadline",
+                         :"close-text" => "Close",
+                         :"is-open" => "openedDatePicker",
+                         :"show-button-bar" => true }
+      %span.input-group-btn
+        %button.btn.btn-default.panel-btn-mini{ :type => "button",
+            :"ng-click" => "openedDatePicker=!openedDatePicker" }
+          %span.glyphicon.glyphicon-calendar
+        %button.btn.btn-success.panel-btn{:type => "submit"} Save
+        %button.btn.btn-default.panel-btn{:"ng-click" => "editingDeadline = false; openingTask = false", :type => "button"} Cancel

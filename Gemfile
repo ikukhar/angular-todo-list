@@ -18,6 +18,7 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 
 gem 'haml-rails', "~> 0.9"
+gem 'bootstrap-sass', '~> 3.3.5'
 gem 'devise'
 gem 'devise_token_auth'
 gem 'omniauth',  '>= 1.0.0'

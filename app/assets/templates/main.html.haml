@@ -10,9 +10,8 @@
       %div{ :"ng-controller" => "TasksController" }
         %div{ :"ng-include" => "'assets/_add_task.html'" }
 
-
         %ul.list-unstyled{ :"ui-sortable" => "sortableOptions", :"ng-model" => "tasks" }
-          %li.task-form.animate-enter{ :"ng-repeat" => "task in tasks" }
+          %li.wrap-task-form.animate-enter{ :"ng-repeat" => "task in tasks" }
             %div{ :"ng-include" => "'assets/_task.html'" }
 
   .debug

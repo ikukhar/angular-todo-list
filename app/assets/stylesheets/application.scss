@@ -11,8 +11,8 @@
  * file per style scope.
  *
  */
-
- @import "bootstrap.min";
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
  @import "eden";
  @import "animate";
  @import "main";

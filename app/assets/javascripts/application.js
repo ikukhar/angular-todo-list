@@ -23,5 +23,6 @@
 //= require angular-resource
 //= require app/main
 //= require angular-rails-templates
+//= require angular-bootstrap
 
 //= require_tree .
