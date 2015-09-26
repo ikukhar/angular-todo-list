@@ -1,5 +1,5 @@
-@todo_list.controller 'MessagesController', ['$scope', '$location', 'Message', '$filter', (
-                                              $scope,   $location,   Message,   $filter) ->
+@todo_list.controller 'MessagesController', ['$scope', '$location', 'Message', '$filter', 'Upload', (
+                                              $scope,   $location,   Message,   $filter,   Upload) ->
 
   $scope.task = $scope.$parent.task
   $scope.messages = Message.query(task_id: $scope.task.id)
@@ -23,6 +23,19 @@
       $scope.messages = msgs
       $scope.task.msg_count -= 1
 
-   $scope.upload = (file) ->
+  $scope.upload = (message, file) ->
+    Upload.upload({
+      url: 'api/messages/'+message.id
+      method: 'PUT'
+      fields: { 'id': message.id, 'task_id': $scope.task.id }
+      file: file
+    }).success( (data, status, headers, config) ->
+      message.file_file_name = data.file_file_name
+    )
 
+  $scope.showMessage = (message) ->
+    if message.file_file_name
+      message.text + ' (' +message.file_file_name + ')'
+    else
+      message.text
 ]

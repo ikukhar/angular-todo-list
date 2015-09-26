@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :projects, only: [:index, :create, :update, :destroy]
     resources :tasks,    only: [:index, :create, :update, :destroy]
     resources :messages, only: [:index, :create, :update, :destroy]
+    post 'messages/upload_file/:id', to: 'messages#upload_file'
   end
 
 end

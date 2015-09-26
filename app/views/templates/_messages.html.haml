@@ -2,14 +2,17 @@
   %ul.list-unstyled{ :"ng-model" => "messages" }
     %li.wrap-task-form.animate-enter{ :"ng-repeat" => "message in messages" }
 
-      %div{ :"ng-hide" => "editing", :"ng-mouseenter" => "showButtons = true", :"ng-mouseleave" => "showButtons = false" }
+      %div{ :"ng-hide" => "editing", :"ng-mouseenter" => "showButtonsM = true", :"ng-mouseleave" => "showButtonsM = false" }
         %div.message
           .wrap-name
             %span.name{ :"ng-click" => "editText = message.text; editing = true" }
-              {{ message.text }}
+              {{ showMessage(message) }}
 
-          %span.input-group-btn{ :"ng-show" => "showButtons" }
-            %button.btn.btn-info.panel-btn-mini{ :"ng-click" => "uploading=!uploading"}
+          %span.input-group-btn{ :"ng-show" => "showButtonsM" }
+            %button.btn.btn-info.panel-btn-mini{ :type => "file",
+                                                 :"ngf-select" => "upload(message, $file)",
+                                                 :"ngf-max-size" => "10MB",
+                                                 :"ng-show" => "!message.file_file_name" }
               %span.glyphicon.glyphicon-paperclip
             %button.btn.btn-default.panel-btn-mini{ :"ng-click" => "remove(task)"}
               %span.glyphicon.glyphicon-remove
@@ -21,15 +24,6 @@
           %span.input-group-btn
             %button.btn.btn-success.panel-btn{:type => "submit"} Save
             %button.btn.btn-default.panel-btn{:"ng-click" => "editing = false", :type => "button"} Cancel
-
-      %div{ :"ng-show" => "uloading" }
-        %button{ :type => "file",
-                :"ngf-select" => "upload($file)",
-                :"ngf-max-size" => "10MB"}
-          Select File
-        File: {{f.name}} {{f.$error}} {{f.$errorParam}}
-        %span.progress{ :"ng-show" => "f.progress >= 0" }
-          %div{ :style => "width:{{f.progress}}%", :"ng-bind" => "f.progress + '%'" }
 
 
   %form.input-group.confirmable-form{ :"ng-submit" => "add(text); text=''"}

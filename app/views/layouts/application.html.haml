@@ -1,5 +1,5 @@
 !!!
-%html{ :"ng-app" => "TodoList", :"ng-class" => "ng-cloak" }
+%html{ :"ng-app" => "TodoList" }
 
   %head
     %title Angular Todo List
@@ -9,7 +9,7 @@
     = favicon_link_tag '', href: '/assets/images/favicon.png'
     %base{href: "/"}
 
-  %body
+  %body{ :"ng-class" => "ng-cloak" }
     %nav.navbar.navbar-inverse
       .container
         .col-sm-8.col-sm-offset-2
@@ -26,9 +26,9 @@
                   {{user.email}}
                   %span.caret
                 %ul.dropdown-menu{ role: "menu" }
-                  %li
-                    %a{ :"ng-href" => "#" }
-                      Profile
+                  -# %li
+                  -#   %a{ :"ng-href" => "#" }
+                  -#     Profile
                   %li
                     %a{ :"ng-href" => "#", :"ng-click" => 'signOut()' }
                       Sign out
