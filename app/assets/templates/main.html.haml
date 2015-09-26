@@ -12,9 +12,8 @@
 
         %ul.list-unstyled{ :"ui-sortable" => "sortableOptions", :"ng-model" => "tasks" }
           %li.wrap-task-form.animate-enter{ :"ng-repeat" => "task in tasks" }
-            %div{ :"ng-include" => "'assets/_task.html'" }
+            %div.task-form{ :"ng-class" => "{ 'open-task': task.openingTask }"}
+              %div{ :"ng-include" => "'assets/_task.html'" }
 
-  .debug
-    Projects:
-    %p.text-info
-      {{ projects | json}}
+              %div{ :"ng-controller" => "MessagesController" }
+                %div{ :"ng-include" => "'assets/_messages.html'" }

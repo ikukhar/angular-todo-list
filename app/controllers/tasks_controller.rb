@@ -1,17 +1,12 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :update, :destroy]
+  before_action :set_task, only: [:update, :destroy]
 
-  # GET /tasks
-  # GET /tasks.json
   def index
     render json: Task.where(project_id: params[:project_id]).order('position desc')
   end
 
-  # POST /tasks
-  # POST /tasks.json
   def create
     @task = Task.new(task_params)
-
     if @task.save
       render json: @task, status: :created, location: @task
     else
@@ -19,11 +14,8 @@ class TasksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /tasks/1
-  # PATCH/PUT /tasks/1.json
   def update
     @task = Task.find(params[:id])
-
     if @task.update(task_params)
       head :no_content
     else
@@ -31,11 +23,8 @@ class TasksController < ApplicationController
     end
   end
 
-  # DELETE /tasks/1
-  # DELETE /tasks/1.json
   def destroy
     @task.destroy
-
     head :no_content
   end
 

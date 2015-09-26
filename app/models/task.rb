@@ -1,6 +1,7 @@
 class Task < ActiveRecord::Base
 
   belongs_to :project
+  has_many   :messages
 
   after_initialize :default_settings
   after_save       :update_project_done

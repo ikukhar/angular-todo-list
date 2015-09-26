@@ -1,5 +1,5 @@
 @todo_list.controller 'ProjectsController', ['$scope', '$location', 'Project', '$filter', (
-                                              $scope, $location, Project, $filter) ->
+                                              $scope,   $location,   Project,   $filter) ->
 
   $scope.projects = Project.query()
   $scope.addingTask = false

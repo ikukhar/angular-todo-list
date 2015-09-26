@@ -1,5 +1,5 @@
 @todo_list.controller 'TasksController', ['$scope', '$location', 'Task', '$filter', (
-                                           $scope, $location, Task, $filter) ->
+                                           $scope,   $location,   Task,   $filter) ->
 
   $scope.project = $scope.$parent.project
   $scope.tasks = Task.query(project_id: $scope.project.id)
@@ -16,6 +16,9 @@
       task.name + " ("+$filter('date')(task.deadline, "dd-MM-yyyy")+")"
     else
       task.name
+
+  $scope.showMsgCount = (task) ->
+    task.msg_count if task.msg_count > 0
 
   $scope.add = (name) ->
     task = new Task

@@ -1,0 +1,30 @@
+%div.messages{ :"ng-show" => "task.showMessages" }
+  %ul.list-unstyled{ :"ng-model" => "messages" }
+    %li.wrap-task-form.animate-enter{ :"ng-repeat" => "message in messages" }
+
+      %div{ :"ng-hide" => "editing", :"ng-mouseenter" => "showButtons = true", :"ng-mouseleave" => "showButtons = false" }
+        %div.message
+          .wrap-name
+            %span.name{ :"ng-click" => "editText = message.text; editing = true" }
+              {{ message.text }}
+
+          %span.input-group-btn{ :"ng-show" => "showButtons" }
+            %button.btn.btn-default.panel-btn-mini{ :"ng-click" => "remove(task)"}
+              %span.glyphicon.glyphicon-remove
+
+
+      %div{ :"ng-show" => "editing" }
+        %form.input-group{ :"ng-submit" => "message.text = editText; update(message); editing = false" }
+          %input.form-control{ :"ng-model" => "editText", :type => "text" ,:required => true}
+          %span.input-group-btn
+            %button.btn.btn-success.panel-btn{:type => "submit"} Save
+            %button.btn.btn-default.panel-btn{:"ng-click" => "editing = false", :type => "button"} Cancel
+
+
+  %form.input-group.confirmable-form{ :"ng-submit" => "add(text); text=''"}
+    %input.form-control{ :"ng-model" => "text",
+                         :placeholder => "Type message",
+                         :type => "text",
+                         :required => true }
+    %span.input-group-btn
+      %button.btn.btn-success{:type => "submit"} Add message

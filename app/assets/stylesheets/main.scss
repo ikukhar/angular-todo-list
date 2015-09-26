@@ -63,6 +63,7 @@
 
 .panel-btn-mini {
   width: 45px;
+  padding: 0;
 }
 
 .wrap-task-form {
@@ -85,7 +86,7 @@
   margin-top: 10px;
 }
 
-.task .wrap-name {
+.wrap-name {
   width: 100%;
   margin-top: 6px;
 }
@@ -100,6 +101,10 @@
   width: 0;
 }
 
+.message .input-group-btn {
+  width: 0;
+}
+
 .task.done .name {
   text-decoration: line-through;
 }
@@ -108,7 +113,26 @@
   background-color: #ecf0f1;
 }
 
+.message:hover {
+  background-color: #ecf0f1;
+}
+
 .open-task {
   border: 1px solid #bdc3c7;
-  padding: 4px 4px 0 4px;
+  padding: 4px;
+}
+
+.messages {
+  padding-left: 15px;
+}
+
+.message {
+  height: 34px;
+  display: flex;
+  color: #3498db
+}
+
+.message .name {
+  padding-left: 10px;
+  font-size:  12px;
 }
