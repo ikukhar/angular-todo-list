@@ -9,8 +9,8 @@
   'ngMessages'
 ])
 
-@todo_list.config(['$routeProvider', '$locationProvider', '$httpProvider', (
-                    $routeProvider, $locationProvider, $httpProvider) ->
+@todo_list.config(['$routeProvider', '$locationProvider', '$httpProvider', '$authProvider', (
+                    $routeProvider,   $locationProvider,   $httpProvider,   $authProvider) ->
 
   $routeProvider
     .when('/', {

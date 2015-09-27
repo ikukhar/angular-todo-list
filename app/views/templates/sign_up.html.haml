@@ -1,4 +1,4 @@
-%button.btn.btn-primary.btn-lg{:"ng-click" => "authenticate('github')"} Sign in with github
+-# %button.btn.btn-primary.btn-lg{:"ng-click" => "authenticate('github')"} Sign in with github
 %form{ :"ng-init" => "registrationForm = {}",
        :"ng-submit" => "handleRegBtnClick()",
        :role => "form",
@@ -44,4 +44,5 @@
       %div{ :"ng-message" => "maxlength" }
         ="Password must not exceed #{Devise.password_length.first} characters"
 
-  %button.btn.btn-primary.btn-lg{ :type => "submit", :"ng-disabled" => "form.$invalid" } Register
+  %p
+    %button.btn.btn-primary.btn-lg{ :type => "submit", :"ng-disabled" => "form.$invalid" } Register
