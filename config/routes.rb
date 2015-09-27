@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
 
-  root 'templates#nothing'
-  get  'sign_in', to: 'templates#sign_in'
-  get  'sign_up', to: 'templates#sign_up'
+  root 'templates#start'
+  get  'templates/sign_in', to: 'templates#sign_in'
+  get  'templates/sign_up', to: 'templates#sign_up'
   get  'templates/index', to: 'templates#index'
-  # get '*path', to: 'templates#index', constraints: lambda { |request| !request.url.include?('/api/') }
+  get '*path', to: 'templates#start', constraints: lambda { |request| !request.url.include?('/api/') }
 
   scope 'api' do
     mount_devise_token_auth_for 'User', at: '/auth'

@@ -1,19 +1,29 @@
 %div
   .panel.panel-default.project
-    .panel-heading.project{ :"ng-mouseenter" => "showButtons = true",
-                            :"ng-mouseleave" => "showButtons = false" }
+    .panel-heading.project{ :"ng-mouseenter" => "showButtonsProject = true",
+                            :"ng-mouseleave" => "showButtonsProject = false" }
 
-      .input-group.project{ :"ng-hide" => "editing" }
-        %span.name{ :"ng-click" => "editName = project.name; editing = true", :"ng-class" => "{ 'project': !project.done, 'project done': project.done }" }
+      .input-group.project{ :"ng-hide" => "project.editing" }
+        %span.name{ :"ng-click" => "editName = project.name; project.editing = true; focus = true",
+                    :"ng-class" => "{ 'project': !project.done, 'project done': project.done }" }
           {{ project.name }}
-        %span.input-group-btn{ :"ng-show" => "showButtons" }
-          %button.btn.btn-primary.panel-btn{ :"ng-hide" => "project.addingTask", :"ng-click" => "project.addingTask = true" } Add task
+        %span.input-group-btn{ :"ng-show" => "showButtonsProject" }
+          %button.btn.btn-primary.panel-btn{ :"ng-hide" => "project.addingTask",
+                                             :"ng-click" => "project.addingTask = true; project.addingTaskFocus = true" } Add task
           %button.btn.btn-default.panel-btn-mini{ :"ng-hide" => "project.addingTask", :"ng-click" => "remove(project)" }
             %span.glyphicon.glyphicon-remove
 
-      %form{ :"ng-show" => "editing", :"ng-submit" => "project.name = editName; update(project); editing = false" }
-        .input-group
-          %input.form-control{ :"ng-model" => "editName", :type => "text" ,:required => true }
-          %span.input-group-btn
-            %button.btn.btn-success.panel-btn{:type => "submit"} Save
-            %button.btn.btn-default.panel-btn{:"ng-click" => "editing = false", :type => "button"} Cancel
+      %form{ :"ng-show" => "project.editing",
+             :"ng-submit" => "project.name = editName; update(project); project.editing = false",
+             :name => 'form',
+             :novalidate => true }
+        .form-group{ :"ng-class" => "{ 'has-error': form.name.$touched && form.name.$invalid }" }
+          .input-group
+            %input.form-control{ :"ng-model" => "editName",
+                                 :type => "text" ,
+                                 :required => true,
+                                 :name => 'name',
+                                 :focus => "focus" }
+            %span.input-group-btn
+              %button.btn.btn-success.panel-btn{ :type => "submit", :"ng-disabled" => "form.$invalid" } Save
+              %button.btn.btn-default.panel-btn{ :"ng-click" => "project.editing = false", :type => "button" } Cancel

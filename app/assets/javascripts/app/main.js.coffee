@@ -5,7 +5,8 @@
   'ng-token-auth',
   'ngResource',
   'ui.bootstrap',
-  'ngFileUpload'
+  'ngFileUpload',
+  'ngMessages'
 ])
 
 @todo_list.config(['$routeProvider', '$locationProvider', '$httpProvider', (

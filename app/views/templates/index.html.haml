@@ -2,7 +2,7 @@
 
 %div{ :"ng-controller" => "ProjectsController" }
   =render 'add_project'
-
+  
   %ul.list-unstyled{ :"ui-sortable" => "sortableOptions", :"ng-model" => "projects" }
     %li.project-form{ :"id" => "{{project.id}}", :"ng-repeat" => "project in projects" }
       =render 'project'

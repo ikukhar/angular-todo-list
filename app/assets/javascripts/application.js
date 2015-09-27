@@ -24,5 +24,6 @@
 //= require app/main
 //= require angular-bootstrap
 //= require ng-file-upload
+//= require angular-messages
 
 //= require_tree .

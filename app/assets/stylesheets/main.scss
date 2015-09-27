@@ -14,6 +14,10 @@
   padding: 0;
 }
 
+.form-group {
+  margin-bottom: 0;
+}
+
 .new-project {
   margin-top: -5px;
   margin-bottom: 10px;
@@ -55,6 +59,7 @@
 .btn {
   height: 34px;
   font-weight: normal;
+  padding-top: 8px;
 }
 
 .panel-btn {

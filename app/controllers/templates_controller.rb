@@ -1,6 +1,6 @@
 class TemplatesController < ApplicationController
 
-  def nothing
+  def start
   end
 
   def index

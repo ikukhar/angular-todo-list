@@ -9,6 +9,7 @@
     "ng-token-auth": "latest",
     "jquery-ui": "latest",
     "angular-bootstrap": "latest",
-    "ng-file-upload": "latest"
+    "ng-file-upload": "latest",
+    "angular-messages": "latest"
   }
 }

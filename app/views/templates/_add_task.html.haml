@@ -1,8 +1,15 @@
-%form.input-group.confirmable-form{ :"ng-show" => "project.addingTask", :"ng-submit" => "add(name); name=''; project.addingTask = false"}
-  %input.form-control{ :"ng-model" => "name",
-                       :placeholder => "Type task name",
-                       :type => "text",
-                       :required => true }
-  %span.input-group-btn
-    %button.btn.btn-success.panel-btn{:type => "submit"} Save
-    %button.btn.btn-default.panel-btn{:"ng-click" => "project.addingTask = false", :type => "button"} Cancel
+%form.confirmable-form{:"ng-show" => "project.addingTask",
+                       :"ng-submit" => "add(name); name=''; project.addingTask = false;",
+                       :name => 'form',
+                       :novalidate => true }
+  .form-group{ :"ng-class" => "{ 'has-error': form.name.$touched && form.name.$invalid }" }
+    .input-group
+      %input.form-control{ :"ng-model" => "name",
+                           :placeholder => "Type task name",
+                           :type => "text",
+                           :required => true,
+                           :name => "name",
+                           :focus => "project.addingTaskFocus" }
+      %span.input-group-btn
+        %button.btn.btn-success.panel-btn{ :type => "submit", :"ng-disabled" => "form.$invalid" } Save
+        %button.btn.btn-default.panel-btn{ :"ng-click" => "project.addingTask = false", :type => "button" } Cancel

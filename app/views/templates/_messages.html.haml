@@ -2,34 +2,47 @@
   %ul.list-unstyled{ :"ng-model" => "messages" }
     %li.wrap-task-form.animate-enter{ :"ng-repeat" => "message in messages" }
 
-      %div{ :"ng-hide" => "editing", :"ng-mouseenter" => "showButtonsM = true", :"ng-mouseleave" => "showButtonsM = false" }
+      %div{ :"ng-hide" => "message.editing",
+            :"ng-mouseenter" => "showButtonsMsg = true",
+            :"ng-mouseleave" => "showButtonsMsg = false" }
         %div.message
           .wrap-name
-            %span.name{ :"ng-click" => "editText = message.text; editing = true" }
+            %span.name{ :"ng-click" => "editText = message.text; message.editing = true; focus = true" }
               {{ showMessage(message) }}
 
-          %span.input-group-btn{ :"ng-show" => "showButtonsM" }
+          %span.input-group-btn{ :"ng-show" => "showButtonsMsg" }
             %button.btn.btn-info.panel-btn-mini{ :type => "file",
                                                  :"ngf-select" => "upload(message, $file)",
                                                  :"ngf-max-size" => "10MB",
-                                                 :"ng-show" => "!message.file_file_name" }
+                                                 :"ng-disabled" => "message.file" }
               %span.glyphicon.glyphicon-paperclip
             %button.btn.btn-default.panel-btn-mini{ :"ng-click" => "remove(task)"}
               %span.glyphicon.glyphicon-remove
 
+      %form{ :"ng-show" => "message.editing",
+             :"ng-submit" => "message.text = editText; update(message); message.editing = false",
+             :name => 'form',
+             :novalidate => true }
+        .form-group{ :"ng-class" => "{ 'has-error': form.text.$touched && form.text.$invalid }" }
+          .input-group
+            %input.form-control{ :"ng-model" => "editText",
+                                 :type => "text",
+                                 :required => true,
+                                 :name => 'text',
+                                 :focus => "focus"}
+            %span.input-group-btn
+              %button.btn.btn-success.panel-btn{ :type => "submit", :"ng-disabled" => "form.$invalid" } Save
+              %button.btn.btn-default.panel-btn{ :"ng-click" => "message.editing = false", :type => "button" } Cancel
 
-      %div{ :"ng-show" => "editing" }
-        %form.input-group{ :"ng-submit" => "message.text = editText; update(message); editing = false" }
-          %input.form-control{ :"ng-model" => "editText", :type => "text" ,:required => true}
-          %span.input-group-btn
-            %button.btn.btn-success.panel-btn{:type => "submit"} Save
-            %button.btn.btn-default.panel-btn{:"ng-click" => "editing = false", :type => "button"} Cancel
-
-
-  %form.input-group.confirmable-form{ :"ng-submit" => "add(text); text=''"}
-    %input.form-control{ :"ng-model" => "text",
-                         :placeholder => "Type message",
-                         :type => "text",
-                         :required => true }
-    %span.input-group-btn
-      %button.btn.btn-success{:type => "submit"} Add message
+  %form.confirmable-form{:"ng-submit" => "add(text); text=''",
+                         :name => 'form',
+                         :novalidate => true }
+    .form-group{ :"ng-class" => "{ 'has-error': form.text.$touched && form.text.$invalid }" }
+      .input-group
+        %input.form-control{ :"ng-model" => "text",
+                            :placeholder => "Type message",
+                            :type => "text",
+                            :required => true,
+                            :name => 'text'}
+        %span.input-group-btn
+          %button.btn.btn-success{ :type => "submit", :"ng-disabled" => "form.$invalid" } Add message

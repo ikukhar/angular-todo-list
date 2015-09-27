@@ -1,15 +1,17 @@
 
-%div{ :"ng-hide" => "editing", :"ng-mouseenter" => "showButtons = true", :"ng-mouseleave" => "showButtons = false" }
+%div{ :"ng-hide" => "task.editing",
+      :"ng-mouseenter" => "showButtonsTask = true",
+      :"ng-mouseleave" => "showButtonsTask = false" }
   %div{ :"ng-class" => "{ 'task': !task.done, 'task done': task.done }"}
 
     %input.task-check{ :"ng-model" => "task.done", :"ng-change" => "update(task); changeProjectDone()", :type => "checkbox" }
 
     .wrap-name
-      %span.name{ :"ng-click" => "editName = task.name; editing = true" }
+      %span.name{ :"ng-click" => "editName = task.name; task.editing = true; focus = true" }
         {{ showTask(task)}}
 
-    %span.input-group-btn{ :"ng-show" => "showButtons" }
-      %button.btn.btn-success.panel-btn-mini{ :"ng-click" => "task.showMessages = !task.showMessages; task.openingTask = !task.openingTask"}
+    %span.input-group-btn{ :"ng-show" => "showButtonsTask || editingDeadline || task.showMessages" }
+      %button.btn.btn-success.panel-btn-mini{ :"ng-click" => "task.showMessages = !task.showMessages; task.openingTask = !task.openingTask;"}
         %span.glyphicon.glyphicon-envelope
         {{showMsgCount(task)}}
       %button.btn.btn-danger.panel-btn-mini{ :type => "button",
@@ -19,12 +21,20 @@
         %span.glyphicon.glyphicon-remove
 
 
-%div{ :"ng-show" => "editing" }
-  %form.input-group{ :"ng-submit" => "task.name = editName; update(task); editing = false" }
-    %input.form-control{ :"ng-model" => "editName", :type => "text" ,:required => true}
-    %span.input-group-btn
-      %button.btn.btn-success.panel-btn{:type => "submit"} Save
-      %button.btn.btn-default.panel-btn{:"ng-click" => "editing = false", :type => "button"} Cancel
+%form{ :"ng-show" => "task.editing",
+       :"ng-submit" => "task.name = editName; update(task); task.editing = false",
+       :name => 'form',
+       :novalidate => true }
+  .form-group{ :"ng-class" => "{ 'has-error': form.name.$touched && form.name.$invalid }" }
+    .input-group
+      %input.form-control{ :"ng-model" => "editName",
+                           :type => "text",
+                           :required => true,
+                           :name => 'name',
+                           :focus => "focus"}
+      %span.input-group-btn
+        %button.btn.btn-success.panel-btn{ :type => "submit", :"ng-disabled" => "form.$invalid" } Save
+        %button.btn.btn-default.panel-btn{ :"ng-click" => "task.editing = false", :type => "button" } Cancel
 
 %div{ :"ng-show" => "editingDeadline" }
   %form.input-group.confirmable-form{ :"ng-submit" => "task.deadline = editDeadline; update(task, editName); editingDeadline = false; openingTask = false" }
