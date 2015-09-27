@@ -17,7 +17,7 @@ class Task < ActiveRecord::Base
   end
 
   def update_project_done
-    count_false = self.project.tasks.select{ |task| task.done == false}.count
+    count_false = Task.where(project: self.project, done: false).count
     self.project.update(done: count_false == 0 ? true : false)
   end
 

@@ -43,6 +43,7 @@ group :development, :test do
   gem 'faker'
   gem 'database_cleaner'
   gem 'json_spec', '~> 1.1.4'
+  gem 'shoulda-matchers', require: false
 end
 
 group :development do
