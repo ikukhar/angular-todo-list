@@ -1,11 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Project, type: :model do
-  before do
-    @project = Project.new(name: "Test project")
-  end
 
-  subject { @project }
+  before do
+    @project = create(:project)
+  end
 
   it { should respond_to(:name) }
   it { should be_valid }
@@ -14,5 +13,5 @@ RSpec.describe Project, type: :model do
     before { @project.name = " " }
     it { should_not be_valid }
   end
- 
+
 end

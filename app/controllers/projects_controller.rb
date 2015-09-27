@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     if @project.save
-      render json: @project.to_json, status: :created, location: @project
+      render json: @project, status: :created, location: @project
     else
       render json: @project.errors, status: :unprocessable_entity
     end
@@ -20,7 +20,7 @@ class ProjectsController < ApplicationController
 
   def update
     if @project.update(project_params)
-      render json: @project.to_json, status: :ok, location: @project
+      render json: @project, status: :ok, location: @project
     else
       render json: @project.errors, status: :unprocessable_entity
     end
@@ -34,6 +34,6 @@ class ProjectsController < ApplicationController
   private
 
     def project_params
-      params.require(:project).permit(:name, :position).merge(user_id: current_user.id)
+      params.require(:project).permit(:user_id, :name, :position)
     end
 end

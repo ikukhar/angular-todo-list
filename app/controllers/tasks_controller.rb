@@ -17,7 +17,7 @@ class TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
     if @task.update(task_params)
-      head :no_content
+      render json: @task, status: :ok, location: @project
     else
       render json: @task.errors, status: :unprocessable_entity
     end

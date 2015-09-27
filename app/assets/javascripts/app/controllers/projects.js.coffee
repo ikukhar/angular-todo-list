@@ -1,11 +1,12 @@
-@todo_list.controller 'ProjectsController', ['$scope', '$location', 'Project', '$filter', (
-                                              $scope,   $location,   Project,   $filter) ->
+@todo_list.controller 'ProjectsController', ['$scope', '$location', 'Project', '$filter', '$rootScope', (
+                                              $scope,   $location,   Project,   $filter,   $rootScope) ->
 
   $scope.projects = Project.query()
   $scope.addingTask = false
 
   $scope.add = (name) ->
     project = new Project
+    project.user_id = $rootScope.user.id
     project.name = name
     project.$save (result) ->
       $scope.projects.unshift(result)

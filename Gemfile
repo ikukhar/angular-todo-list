@@ -39,6 +39,10 @@ group :development, :test do
   gem 'spork-rails'
   gem 'teaspoon-jasmine'
   gem 'phantomjs'
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'database_cleaner'
+  gem 'json_spec', '~> 1.1.4'
 end
 
 group :development do
@@ -47,4 +51,10 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+end
+
+# heroku
+group :production do
+  gem 'pg'
+  gem 'rails_12factor' ,'0.0.2'
 end
