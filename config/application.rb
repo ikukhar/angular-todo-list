@@ -35,8 +35,7 @@ module AngularTodoList
     config.generators.helper = false
 
     config.assets.paths << Rails.root.join("vendor","assets","bower_components")
-
-    # config.angular_templates.htmlcompressor = true
+    config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
 
   end
 end
