@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby '2.2.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
@@ -35,7 +35,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem "rspec-rails", "~> 3.0"
-  gem 'spork', github: 'sporkrb/spork'
+  gem 'spork', '~> 1.0rc'
   gem 'spork-rails'
   gem 'teaspoon-jasmine'
   gem 'phantomjs'
