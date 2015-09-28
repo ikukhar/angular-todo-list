@@ -37,8 +37,8 @@ group :development, :test do
   gem "rspec-rails", "~> 3.0"
   gem 'spork', '~> 1.0rc'
   gem 'spork-rails'
-  gem 'teaspoon-jasmine'
-  gem 'phantomjs'
+  # gem 'teaspoon-jasmine'
+  # gem 'phantomjs'
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'database_cleaner'
