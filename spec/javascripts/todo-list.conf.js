@@ -11,11 +11,9 @@ module.exports = function(config) {
     },
 
     files: [
-      'app/assets/javascripts/angular/angular.js',
-      'app/assets/javascripts/angular/angular-mocks.js',
-      'app/assets/javascripts/angular/main.js.coffee',
-      'app/assets/javascripts/angular/controllers/ProjectsCtrl.js.coffee',
-      'app/assets/javascripts/angular/*',
+      'angular/angular.js',
+      'angular-mocks/angular-mocks.js',
+      'app/assets/javascripts/app/*',
       'spec/javascripts/*_spec.js.coffee'
     ]
   });

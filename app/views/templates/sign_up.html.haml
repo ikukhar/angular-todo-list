@@ -40,7 +40,7 @@
     .help-block{ :"ng-messages" => "form.password.$error", :"ng-if" => "form.password.$touched" }
       %div{ :"ng-message" => "required" }  This field is required
       %div{ :"ng-message" => "minlength" }
-        ="Password must be over #{Devise.password_length.first} characters"
+        ="Password must not less #{Devise.password_length.first} characters"
       %div{ :"ng-message" => "maxlength" }
         ="Password must not exceed #{Devise.password_length.first} characters"
 

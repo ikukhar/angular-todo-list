@@ -2,6 +2,7 @@ describe User, type: :model do
 
   before :all do
     @user = create(:user)
+    p @user
   end
 
   it { should have_many(:projects) }

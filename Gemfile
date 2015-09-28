@@ -44,6 +44,8 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'json_spec', '~> 1.1.4'
   gem 'shoulda-matchers', require: false
+  gem 'capybara'
+  gem 'selenium-webdriver'
 end
 
 group :development do

@@ -6,7 +6,8 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 require 'shoulda/matchers'
-require "cancan/matchers"
+require 'cancan/matchers'
+require 'capybara/rspec'
 
 ActiveRecord::Migration.maintain_test_schema!
 
@@ -16,3 +17,5 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
   config.infer_spec_type_from_file_location!
 end
+
+Capybara.default_max_wait_time = 10

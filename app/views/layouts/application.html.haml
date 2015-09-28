@@ -22,7 +22,7 @@
 
             %ul.nav.navbar-nav.pull-right{ :"ng-controller" => "UserSessionsController" }
               %li.dropdown{ :"ng-show" => "user.signedIn" }
-                %a.dropdown-toggle{ :"data-toggle" => "dropdown", :"ng-href" => "#" }
+                %a.dropdown-toggle{ :"data-toggle" => "dropdown", :"ng-href" => "#", id: "dropdown-menu" }
                   {{user.email}}
                   %span.caret
                 %ul.dropdown-menu{ role: "menu" }
@@ -30,7 +30,7 @@
                   -#   %a{ :"ng-href" => "#" }
                   -#     Profile
                   %li
-                    %a{ :"ng-href" => "#", :"ng-click" => 'signOut()' }
+                    %a{ :"ng-href" => "#", :"ng-click" => 'signOut()', id: 'sign-out' }
                       Sign out
 
               %li{ :"ng-show" => "!user.signedIn" }
@@ -46,8 +46,3 @@
         -#   {{error}}
 
         .ng-view
-
-        .debug
-          User:
-          %p.text-info
-            {{ user | json}}

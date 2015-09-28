@@ -4,7 +4,8 @@
   %form{ :"ng-show" => "addingProject",
          :"ng-submit" => "add(name); name=''; addingProject = false",
          :name => 'form',
-         :novalidate => true }
+         :novalidate => true,
+         :id => "add-project-form"}
     .form-group{ :"ng-class" => "{ 'has-error': form.name.$touched && form.name.$invalid }" }
       .input-group
         %input.form-control{ :"ng-model" => "name",
@@ -14,5 +15,7 @@
                              :name => "name",
                              :focus => "focus" }
         %span.input-group-btn
-          %button.btn.btn-success.confirmation-btn{ :type => "submit", :"ng-disabled" => "form.$invalid" } Save
+          %button.btn.btn-success.confirmation-btn{ :type => "submit",
+                                                    :"ng-disabled" => "form.$invalid",
+                                                    :id => "add-project-save-button" } Save
           %button.btn.btn-default.confirmation-btn{ :"ng-click" => "addingProject = false;", :type => "button" } Cancel
