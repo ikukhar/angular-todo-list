@@ -12,3 +12,12 @@
 * shoulda-matchers
 * capybara
 * selenium-webdriver
+### Angular services
+* angular-mocks
+* angular-route
+* angular-resource
+* angular-ui-sortable
+* ng-token-auth
+* angular-bootstrap
+* ng-file-upload
+* angular-messages
