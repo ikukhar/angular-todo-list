@@ -12,6 +12,7 @@
 * shoulda-matchers
 * capybara
 * selenium-webdriver
+
 ### Angular services
 * angular-mocks
 * angular-route
